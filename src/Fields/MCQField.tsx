@@ -15,7 +15,7 @@ import { withTranslationAndStatics } from '../../intl/i18n';
 import { AnswerValues, FormUrl, MCQComponent, MCQItem, Nullable } from '../../../index';
 import sharedStyles, { colors } from './SharedStyles';
 import Icon from '../Icon';
-import Description from './Description';
+import Description from '../components/Description';
 
 const styles = StyleSheet.create({
     answerContainer: {

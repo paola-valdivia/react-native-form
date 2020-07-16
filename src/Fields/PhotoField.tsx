@@ -20,7 +20,7 @@ import CameraWrapper from '../Camera/CameraWrapper';
 import BarcodeScanner from '../Camera/BarcodeScanner';
 
 import sharedStyles, { colors } from './SharedStyles';
-import Description from './Description';
+import Description from '../components/Description';
 import { segmentScreen } from '../../utils/Segment';
 import { ImagePicker } from '../../../native_modules';
 

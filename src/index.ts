@@ -1,9 +1,9 @@
-import DateField from './Form/DateField';
-import InstructionField from './Form/InstructionField';
-import MCQField from './Form/MCQField';
-import MultiLineTextField from './Form/MultiLineTextField';
-import NumericTextField from './Form/NumericTextField';
-import PhotoField from './Form/PhotoField';
-import SingleLineTextField from './Form/SingleLineTextField';
+import DateField from './Fields/DateField';
+import InstructionField from './Fields/InstructionField';
+import MCQField from './Fields/MCQField';
+import MultiLineTextField from './Fields/MultiLineTextField';
+import NumericTextField from './Fields/NumericTextField';
+import PhotoField from './Fields/PhotoField';
+import SingleLineTextField from './Fields/SingleLineTextField';
 
 export { DateField, InstructionField, MCQField, MultiLineTextField, NumericTextField, PhotoField, SingleLineTextField };

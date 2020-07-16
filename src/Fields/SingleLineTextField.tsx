@@ -4,7 +4,7 @@ import R from 'ramda';
 
 import { Nullable } from '../../../index';
 import sharedStyles from './SharedStyles';
-import TextFieldAnimation, { TextFieldDesignProps } from './TextFieldAnimation';
+import TextFieldAnimation, { TextFieldDesignProps } from '../components/TextFieldAnimation';
 
 interface Props extends TextFieldDesignProps {
     value: string;

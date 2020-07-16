@@ -6,7 +6,7 @@ import { AnswerValues, FormUrl, Nullable } from '../../../index';
 import { withTranslationAndStatics } from '../../intl/i18n';
 
 import sharedStyles, { colors } from './SharedStyles';
-import Description from './Description';
+import Description from '../components/Description';
 
 interface Props extends WithTranslation {
     id: string;

@@ -3,7 +3,7 @@ import { View, ViewStyle } from 'react-native';
 
 import sharedStyles from './SharedStyles';
 import { FormUrl } from '../../../index';
-import Description from './Description';
+import Description from '../components/Description';
 
 interface Props {
     description: string;

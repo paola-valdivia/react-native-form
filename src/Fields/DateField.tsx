@@ -9,7 +9,7 @@ import { withTranslationAndStatics } from '../../intl/i18n';
 
 import { AnswerValues, DateComponent, FormUrl, Nullable } from '../../../index';
 import sharedStyles from './SharedStyles';
-import TextFieldAnimation from './TextFieldAnimation';
+import TextFieldAnimation from '../components/TextFieldAnimation';
 
 const styles = StyleSheet.create({
     modal: {
