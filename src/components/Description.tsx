@@ -1,25 +1,38 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-
-import sharedStyles from './SharedStyles';
-import { FormUrl } from '../../../index';
-import DescriptionPictures from './DescriptionPictures';
+import React from 'react';
+import { View, Text, TextStyle, ViewStyle, ImageStyle } from 'react-native';
 import R from 'ramda';
 
+import { FormUrl, ImageViewerProps } from '../types';
+
+import DescriptionPictures from './DescriptionPictures';
+
 interface Props {
-    description?: string;
-    descriptionPictures?: FormUrl[];
+    description?: {
+        text?: string;
+        pictures?: FormUrl[];
+    };
+    imageViewerComponent: React.ComponentType<ImageViewerProps>;
+    styles?: {
+        text?: TextStyle;
+        picturesContainer?: ViewStyle;
+        picture?: ImageStyle;
+    };
 }
 
-export default class Description extends Component<Props> {
-    render() {
-        return (
-            <View>
-                {!!this.props.description && <Text style={sharedStyles.descriptionText}>{this.props.description}</Text>}
-                {this.props.descriptionPictures && (
-                    <DescriptionPictures descriptionPictures={this.props.descriptionPictures} />
-                )}
-            </View>
-        );
-    }
+function Description(props: Props) {
+    const { description, imageViewerComponent, styles } = props;
+    return (
+        <View>
+            {description?.text && <Text style={styles?.text}>{description}</Text>}
+            {description?.pictures && (
+                <DescriptionPictures
+                    pictures={description?.pictures}
+                    imageViewerComponent={imageViewerComponent}
+                    styles={R.omit(['text'], styles)}
+                />
+            )}
+        </View>
+    );
 }
+
+export default React.memo(Description);

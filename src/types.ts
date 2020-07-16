@@ -9,3 +9,9 @@ export interface FormUrl {
         height: number;
     };
 }
+
+export interface ImageViewerProps {
+    pictures: string[];
+    startingIndex: number;
+    goBack: () => void;
+}
