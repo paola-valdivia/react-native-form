@@ -17,9 +17,7 @@
     // Don't accept null or undefined values in types other than themselves or void
     "strictNullChecks": true,
     // Allow import of json files
-    "resolveJsonModule": true,
-    // Create index.d.ts file
-    "declaration": true
+    "resolveJsonModule": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "build"]
