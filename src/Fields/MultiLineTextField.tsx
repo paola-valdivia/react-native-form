@@ -8,7 +8,7 @@ import Description from '../components/Description';
 
 interface Props {
     descriptionProps: DescriptionProps;
-    label: string;
+    label?: string;
     value: string;
     isValid: Nullable<boolean>;
     onChangeText: (text: string) => void;
@@ -66,9 +66,11 @@ function MultiLineTextField(props: Props) {
                 <Description {...descriptionProps} />
 
                 <View style={commonStyles?.labelAndValidationContainer}>
-                    <Text numberOfLines={1} style={commonStyles?.label}>
-                        {label}
-                    </Text>
+                    {label && (
+                        <Text numberOfLines={1} style={commonStyles?.label}>
+                            {label}
+                        </Text>
+                    )}
                     {isValid !== null && (
                         <View
                             style={[

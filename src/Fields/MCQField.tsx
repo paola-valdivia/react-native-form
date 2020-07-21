@@ -65,7 +65,7 @@ function MCQAnswer(props: AnswerProps) {
 
 interface Props {
     descriptionProps: DescriptionProps;
-    label: string;
+    label?: string;
     possibleAnswers: string[];
     selectedAnswersIndices: number[];
     isValid: Nullable<boolean>;
@@ -160,9 +160,11 @@ function MCQField(props: Props) {
             <Description {...props.descriptionProps} />
 
             <View style={props.commonStyles?.labelAndValidationContainer}>
-                <Text numberOfLines={1} style={props.commonStyles?.label}>
-                    {props.label}
-                </Text>
+                {props.label && (
+                    <Text numberOfLines={1} style={props.commonStyles?.label}>
+                        {props.label}
+                    </Text>
+                )}
                 {!props.foldable && props.isValid !== null && (
                     <View
                         style={[
