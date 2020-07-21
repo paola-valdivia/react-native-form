@@ -1,57 +1,56 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableWithoutFeedback, ViewStyle } from 'react-native';
-import { WithTranslation } from 'react-i18next';
+import { View, Text, TextInput, TouchableWithoutFeedback, TextStyle } from 'react-native';
 
-import { AnswerValues, FormUrl, Nullable } from '../../../index';
-import { withTranslationAndStatics } from '../../intl/i18n';
+import { CommonStyles, DescriptionProps, Nullable } from '../types';
+import { baseColors } from '../constants';
 
-import sharedStyles, { colors } from './SharedStyles';
 import Description from '../components/Description';
 
-interface Props extends WithTranslation {
-    id: string;
+interface Props {
+    descriptionProps: DescriptionProps;
     label: string;
-    description?: string;
-    descriptionPictures?: FormUrl[];
-    initialValue: string;
-    saveAnswer: (newAnswerValues: AnswerValues, id: string, isValid: Nullable<boolean>) => void;
+    value: string;
     isValid: Nullable<boolean>;
-    validationFunc: (text: string) => Nullable<boolean>;
-    containerStyle: ViewStyle;
+    onChangeText: (text: string) => void;
+    placeholder?: string;
+    onFocus?: () => void;
+    onBlur?: () => void;
+    commonStyles?: CommonStyles;
+    inputStyle?: TextStyle;
+    colors?: {
+        valid?: string;
+        error?: string;
+        placeholder?: string;
+    };
 }
 
 function MultiLineTextField(props: Props) {
-    const { id, initialValue, isValid, validationFunc, saveAnswer, t } = props;
+    const {
+        descriptionProps,
+        label,
+        value,
+        isValid,
+        onChangeText,
+        placeholder,
+        onFocus,
+        onBlur,
+        commonStyles,
+        inputStyle,
+        colors,
+    } = props;
 
     const inputRef = React.useRef<TextInput>(null);
     const prevFocusRef = React.useRef<boolean>(false);
 
-    const [valid, setValid] = React.useState<Nullable<boolean>>(isValid);
-    const [text, setText] = React.useState(initialValue || '');
     const [isFocused, setFocus] = React.useState(false);
 
-    /* props value has always the priority */
+    // Trigger onFocus/onBlur
     React.useEffect(() => {
-        setText(initialValue || '');
-    }, [initialValue, setText]);
+        if (!prevFocusRef.current && isFocused && onFocus) onFocus();
+        if (prevFocusRef.current && !isFocused && onBlur) onBlur();
 
-    /* props validation has always the priority */
-    React.useEffect(() => {
-        setValid(isValid);
-    }, [isValid, setValid]);
-
-    /* save answers on blur */
-    React.useEffect(() => {
-        if (prevFocusRef.current && !isFocused) {
-            saveAnswer(text, id, valid);
-        }
         prevFocusRef.current = isFocused;
-    }, [id, isFocused, saveAnswer, text, valid]);
-
-    /* update validation on text change */
-    React.useEffect(() => {
-        setValid(validationFunc(text));
-    }, [text, setValid, validationFunc]);
+    }, [isFocused, onFocus, onBlur]);
 
     // setFocus and focus the input on press
     const onPress = React.useCallback(() => {
@@ -63,26 +62,22 @@ function MultiLineTextField(props: Props) {
 
     return (
         <TouchableWithoutFeedback onPress={onPress}>
-            <View
-                style={[
-                    sharedStyles.container,
-                    {
-                        shadowOpacity: isFocused ? 0.35 : 0.1,
-                    },
-                    props.containerStyle,
-                ]}
-            >
-                <Description description={props.description} descriptionPictures={props.descriptionPictures} />
+            <View style={[{ shadowOpacity: isFocused ? 0.35 : 0.1 }, commonStyles?.container]}>
+                <Description {...descriptionProps} />
 
-                <View style={sharedStyles.labelAndValidationContainer}>
-                    <Text numberOfLines={1} style={sharedStyles.labelText}>
-                        {props.label}
+                <View style={commonStyles?.labelAndValidationContainer}>
+                    <Text numberOfLines={1} style={commonStyles?.label}>
+                        {label}
                     </Text>
-                    {valid !== null && (
+                    {isValid !== null && (
                         <View
                             style={[
-                                sharedStyles.validationDot,
-                                { backgroundColor: valid ? colors.valid : colors.error },
+                                commonStyles?.validationDot,
+                                {
+                                    backgroundColor: isValid
+                                        ? colors?.valid || baseColors.valid
+                                        : colors?.error || baseColors.error,
+                                },
                             ]}
                         />
                     )}
@@ -90,18 +85,18 @@ function MultiLineTextField(props: Props) {
 
                 <TextInput
                     ref={inputRef}
-                    value={text}
+                    value={value}
                     onBlur={() => setFocus(false)}
                     onFocus={() => setFocus(true)}
-                    onChangeText={setText}
-                    placeholder={t('form.placeholder.textField')}
+                    onChangeText={onChangeText}
+                    placeholder={placeholder}
                     multiline={true}
-                    placeholderTextColor={colors.placeholder}
-                    style={{ ...sharedStyles.inputText, height: 115 }}
+                    placeholderTextColor={colors?.placeholder || baseColors.placeholder}
+                    style={inputStyle}
                 />
             </View>
         </TouchableWithoutFeedback>
     );
 }
 
-export default React.memo(withTranslationAndStatics()(MultiLineTextField));
+export default React.memo(MultiLineTextField);
