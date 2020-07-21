@@ -1,25 +1,12 @@
 import React from 'react';
-import { View, Text, TextStyle, ViewStyle, ImageStyle } from 'react-native';
+import { View, Text } from 'react-native';
 import R from 'ramda';
 
-import { FormUrl, ImageViewerProps } from '../types';
+import { DescriptionProps } from '../types';
 
 import DescriptionPictures from './DescriptionPictures';
 
-interface Props {
-    description?: {
-        text?: string;
-        pictures?: FormUrl[];
-    };
-    imageViewerComponent: React.ComponentType<ImageViewerProps>;
-    styles?: {
-        text?: TextStyle;
-        picturesContainer?: ViewStyle;
-        picture?: ImageStyle;
-    };
-}
-
-function Description(props: Props) {
+function Description(props: DescriptionProps) {
     const { description, imageViewerComponent, styles } = props;
     return (
         <View>

@@ -5,7 +5,7 @@ import { FormUrl, ImageViewerProps } from '../types';
 
 interface Props {
     pictures: FormUrl[];
-    imageViewerComponent: React.ComponentType<ImageViewerProps>;
+    imageViewerComponent?: React.ComponentType<ImageViewerProps>;
     styles?: {
         picturesContainer?: ViewStyle;
         picture?: ImageStyle;
@@ -56,15 +56,21 @@ function DescriptionPictures(props: Props) {
 
     return (
         <View>
-            <Modal visible={shouldDisplayViewer} onRequestClose={dismissViewer}>
-                <ImageViewer pictures={pictureUris} startingIndex={viewerIndex} goBack={dismissViewer} />
-            </Modal>
+            {ImageViewer && (
+                <Modal visible={shouldDisplayViewer} onRequestClose={dismissViewer}>
+                    <ImageViewer pictures={pictureUris} startingIndex={viewerIndex} goBack={dismissViewer} />
+                </Modal>
+            )}
 
-            <View style={[{ flex: 1, alignItems: 'center' }, ]}>
+            <View style={[{ flex: 1, alignItems: 'center' }]}>
                 {pictures.map((formUrl, index) => {
                     if (!pictureSizes[index]) return null;
 
                     const { height, width } = pictureSizes[index];
+                    if (!ImageViewer) {
+                        return <Image source={{ uri: formUrl.src }} style={{ marginBottom: 15, height, width }} />;
+                    }
+
                     return (
                         <TouchableHighlight
                             key={formUrl.name}
