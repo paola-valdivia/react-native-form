@@ -33,8 +33,8 @@ export interface DescriptionProps {
 }
 
 export interface CommonStyles {
-    container?: ViewStyle;
-    labelAndValidationContainer?: ViewStyle;
-    label?: TextStyle;
-    validationDot?: ViewStyle;
+    containerStyle?: ViewStyle;
+    labelAndValidationContainerStyle?: ViewStyle;
+    labelStyle?: TextStyle;
+    validationDotStyle?: ViewStyle;
 }

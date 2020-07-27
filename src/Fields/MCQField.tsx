@@ -1,42 +1,11 @@
 import React from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    TouchableWithoutFeedback,
-    ViewStyle,
-    TouchableOpacity,
-    Animated,
-    TextStyle,
-} from 'react-native';
+import { Text, View, TouchableWithoutFeedback, ViewStyle, TouchableOpacity, Animated, TextStyle } from 'react-native';
 
 import { CommonStyles, DescriptionProps, Nullable } from '../types';
+import { baseColors } from '../constants';
+import styles from '../SharedStyles';
 
 import Description from '../components/Description';
-import { baseColors } from '../constants';
-
-const styles = StyleSheet.create({
-    answerContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%',
-        borderRadius: 5,
-        borderWidth: 1,
-        padding: 10,
-    },
-    answerText: {
-        fontFamily: 'Roboto-Medium',
-        fontSize: 13,
-        flex: 1,
-    },
-    closeMcqBox: {
-        color: '#fff',
-        backgroundColor: '#293541',
-        position: 'relative',
-        marginTop: 10,
-    },
-});
 
 interface AnswerProps {
     text: string;
@@ -63,23 +32,9 @@ function MCQAnswer(props: AnswerProps) {
     );
 }
 
-interface Props {
-    descriptionProps: DescriptionProps;
-    label?: string;
-    possibleAnswers: string[];
-    selectedAnswersIndices: number[];
-    isValid: Nullable<boolean>;
-    onSelectAnswer: (answerIndex: number) => void;
-    foldable?: boolean;
-    openFoldableLabel?: (selectedAnswerQty: number) => string;
-    closeFoldableLabel?: (selectedAnswerQty: number) => string;
-    activeOpenFoldableIcon?: React.ReactNode;
-    inactiveOpenFoldableIcon?: React.ReactNode;
-    activeCloseFoldableIcon?: React.ReactNode;
-    inactiveCloseFoldableIcon?: React.ReactNode;
-    shouldAnimateOpenFoldableIcon?: boolean;
-    commonStyles?: CommonStyles;
+interface Styles extends CommonStyles {
     answerContainerStyle?: ViewStyle;
+    answerTextStyle?: TextStyle;
     openFoldableBoxStyle?: ViewStyle;
     openFoldableLabelStyle?: TextStyle;
     closeFoldableBoxStyle?: ViewStyle;
@@ -92,6 +47,24 @@ interface Props {
         activeBackground?: string;
         inactiveBackground?: string;
     };
+}
+
+interface Props extends Styles {
+    descriptionProps: DescriptionProps;
+    label?: string;
+    possibleAnswers: string[];
+    selectedAnswersIndices: number[];
+    isValid: Nullable<boolean>;
+    onSelectAnswer: (answerIndex: number) => void;
+    foldable?: boolean;
+    openFoldableLabel?: (selectedAnswerQty: number) => string;
+    closeFoldableLabel?: (selectedAnswerQty: number) => string;
+    answerIcon?: React.ReactNode;
+    activeOpenFoldableIcon?: React.ReactNode;
+    inactiveOpenFoldableIcon?: React.ReactNode;
+    activeCloseFoldableIcon?: React.ReactNode;
+    inactiveCloseFoldableIcon?: React.ReactNode;
+    shouldAnimateOpenFoldableIcon?: boolean;
 }
 
 function MCQField(props: Props) {
@@ -156,20 +129,21 @@ function MCQField(props: Props) {
     };
 
     return (
-        <View style={props.commonStyles?.container}>
+        <View style={[styles.container, props.containerStyle]}>
             <Description {...props.descriptionProps} />
 
-            <View style={props.commonStyles?.labelAndValidationContainer}>
+            <View style={[styles.labelAndValidationContainer, props.labelAndValidationContainerStyle]}>
                 {props.label && (
-                    <Text numberOfLines={1} style={props.commonStyles?.label}>
+                    <Text numberOfLines={1} style={[styles.labelText, props.labelStyle]}>
                         {props.label}
                     </Text>
                 )}
                 {!props.foldable && props.isValid !== null && (
                     <View
                         style={[
+                            styles.validationDot,
+                            props.validationDotStyle,
                             { backgroundColor: props.isValid ? validColor : errorColor },
-                            props.commonStyles?.validationDot,
                         ]}
                     />
                 )}
@@ -182,6 +156,9 @@ function MCQField(props: Props) {
                             text={possibleAnswer}
                             isSelected={props.selectedAnswersIndices.includes(index)}
                             onPress={() => props.onSelectAnswer(index)}
+                            icon={props.answerIcon}
+                            containerStyle={props.answerContainerStyle}
+                            textStyle={props.answerTextStyle}
                         />
                     );
                 })
@@ -220,7 +197,7 @@ function MCQField(props: Props) {
                                         right: 35,
                                         backgroundColor: props.isValid ? validColor : errorColor,
                                     },
-                                    props.commonStyles?.validationDot,
+                                    props.validationDotStyle,
                                 ]}
                             />
                         )}
@@ -234,6 +211,9 @@ function MCQField(props: Props) {
                                         text={possibleAnswer}
                                         isSelected={props.selectedAnswersIndices.includes(index)}
                                         onPress={() => props.onSelectAnswer(index)}
+                                        icon={props.answerIcon}
+                                        containerStyle={props.answerContainerStyle}
+                                        textStyle={props.answerTextStyle}
                                     />
                                 );
                             })}

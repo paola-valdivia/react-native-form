@@ -3,19 +3,11 @@ import { View, Text, TextInput, TouchableWithoutFeedback, TextStyle } from 'reac
 
 import { CommonStyles, DescriptionProps, Nullable } from '../types';
 import { baseColors } from '../constants';
+import styles from '../SharedStyles';
 
 import Description from '../components/Description';
 
-interface Props {
-    descriptionProps: DescriptionProps;
-    label?: string;
-    value: string;
-    isValid: Nullable<boolean>;
-    onChangeText: (text: string) => void;
-    placeholder?: string;
-    onFocus?: () => void;
-    onBlur?: () => void;
-    commonStyles?: CommonStyles;
+interface Styles extends CommonStyles {
     inputStyle?: TextStyle;
     colors?: {
         valid?: string;
@@ -24,20 +16,19 @@ interface Props {
     };
 }
 
+interface Props extends Styles {
+    descriptionProps: DescriptionProps;
+    label?: string;
+    value: string;
+    isValid: Nullable<boolean>;
+    onChangeText: (text: string) => void;
+    placeholder?: string;
+    onFocus?: () => void;
+    onBlur?: () => void;
+}
+
 function MultiLineTextField(props: Props) {
-    const {
-        descriptionProps,
-        label,
-        value,
-        isValid,
-        onChangeText,
-        placeholder,
-        onFocus,
-        onBlur,
-        commonStyles,
-        inputStyle,
-        colors,
-    } = props;
+    const { descriptionProps, label, value, isValid, onChangeText, placeholder, onFocus, onBlur } = props;
 
     const inputRef = React.useRef<TextInput>(null);
     const prevFocusRef = React.useRef<boolean>(false);
@@ -62,23 +53,24 @@ function MultiLineTextField(props: Props) {
 
     return (
         <TouchableWithoutFeedback onPress={onPress}>
-            <View style={[{ shadowOpacity: isFocused ? 0.35 : 0.1 }, commonStyles?.container]}>
+            <View style={[styles.container, { shadowOpacity: isFocused ? 0.35 : 0.1 }, props.containerStyle]}>
                 <Description {...descriptionProps} />
 
-                <View style={commonStyles?.labelAndValidationContainer}>
+                <View style={[styles.labelAndValidationContainer, props.labelAndValidationContainerStyle]}>
                     {label && (
-                        <Text numberOfLines={1} style={commonStyles?.label}>
+                        <Text numberOfLines={1} style={[styles.labelText, props.labelStyle]}>
                             {label}
                         </Text>
                     )}
                     {isValid !== null && (
                         <View
                             style={[
-                                commonStyles?.validationDot,
+                                styles.validationDot,
+                                props.validationDotStyle,
                                 {
                                     backgroundColor: isValid
-                                        ? colors?.valid || baseColors.valid
-                                        : colors?.error || baseColors.error,
+                                        ? props.colors?.valid || baseColors.valid
+                                        : props.colors?.error || baseColors.error,
                                 },
                             ]}
                         />
@@ -93,8 +85,8 @@ function MultiLineTextField(props: Props) {
                     onChangeText={onChangeText}
                     placeholder={placeholder}
                     multiline={true}
-                    placeholderTextColor={colors?.placeholder || baseColors.placeholder}
-                    style={inputStyle}
+                    placeholderTextColor={props.colors?.placeholder || baseColors.placeholder}
+                    style={[styles.inputText, props.inputStyle]}
                 />
             </View>
         </TouchableWithoutFeedback>
