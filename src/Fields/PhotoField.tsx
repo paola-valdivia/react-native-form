@@ -50,7 +50,7 @@ interface Styles extends CommonStyles {
     };
 }
 
-interface Props<CameraProps, ViewerProps> extends Styles {
+interface Props extends Styles {
     descriptionProps: DescriptionProps;
     label?: string;
     pictureUris: string[];
@@ -61,7 +61,7 @@ interface Props<CameraProps, ViewerProps> extends Styles {
     openCameraIcon: React.ReactNode;
 }
 
-function PhotoField<CameraProps, ViewerProps>(props: Props<CameraProps, ViewerProps>) {
+function PhotoField(props: Props) {
     const validColor = props.colors?.valid || baseColors.valid;
     const errorColor = props.colors?.error || baseColors.error;
 
