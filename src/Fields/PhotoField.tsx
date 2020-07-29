@@ -15,6 +15,7 @@ import { baseColors } from '../constants';
 import sharedStyles from '../SharedStyles';
 
 import Description from '../components/Description';
+import ValidationDot from '../components/ValidationDot';
 
 const styles = StyleSheet.create({
     labelAndValidationContainer: {
@@ -62,9 +63,6 @@ interface Props extends Styles {
 }
 
 function PhotoField(props: Props) {
-    const validColor = props.colors?.valid || baseColors.valid;
-    const errorColor = props.colors?.error || baseColors.error;
-
     return (
         <View style={props.containerStyle}>
             <Description {...props.descriptionProps} />
@@ -79,15 +77,7 @@ function PhotoField(props: Props) {
                 <Text numberOfLines={1} style={[sharedStyles.labelText, props.labelStyle]}>
                     {props.label}
                 </Text>
-                {props.isValid !== null && (
-                    <View
-                        style={[
-                            sharedStyles.validationDot,
-                            props.validationDotStyle,
-                            { backgroundColor: props.isValid ? validColor : errorColor },
-                        ]}
-                    />
-                )}
+                <ValidationDot isValid={props.isValid} style={props.validationDotStyle} colors={props.colors} />
             </View>
 
             <View style={[styles.imagesContainer, props.imagesContainerStyle]}>

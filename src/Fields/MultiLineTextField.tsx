@@ -6,6 +6,7 @@ import { baseColors } from '../constants';
 import styles from '../SharedStyles';
 
 import Description from '../components/Description';
+import ValidationDot from '../components/ValidationDot';
 
 interface Styles extends CommonStyles {
     inputStyle?: TextStyle;
@@ -62,19 +63,7 @@ function MultiLineTextField(props: Props) {
                             {label}
                         </Text>
                     )}
-                    {isValid !== null && (
-                        <View
-                            style={[
-                                styles.validationDot,
-                                props.validationDotStyle,
-                                {
-                                    backgroundColor: isValid
-                                        ? props.colors?.valid || baseColors.valid
-                                        : props.colors?.error || baseColors.error,
-                                },
-                            ]}
-                        />
-                    )}
+                    <ValidationDot isValid={isValid} style={props.validationDotStyle} colors={props.colors} />
                 </View>
 
                 <TextInput

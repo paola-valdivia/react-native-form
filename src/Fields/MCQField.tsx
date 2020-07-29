@@ -6,6 +6,7 @@ import { baseColors } from '../constants';
 import styles from '../SharedStyles';
 
 import Description from '../components/Description';
+import ValidationDot from '../components/ValidationDot';
 
 interface AnswerProps {
     text: string;
@@ -85,8 +86,6 @@ function MCQField(props: Props) {
 
     const toggleFold = () => setIsFolded((prevIsFolded) => !prevIsFolded);
 
-    const validColor = props.colors?.valid || baseColors.valid;
-    const errorColor = props.colors?.error || baseColors.error;
     const activeColor = props.colors?.active || baseColors.main;
     const inactiveColor = props.colors?.inactive || baseColors.inactive;
     const activeBackgroundColor = props.colors?.activeBackground || baseColors.background;
@@ -138,14 +137,8 @@ function MCQField(props: Props) {
                         {props.label}
                     </Text>
                 )}
-                {!props.foldable && props.isValid !== null && (
-                    <View
-                        style={[
-                            styles.validationDot,
-                            props.validationDotStyle,
-                            { backgroundColor: props.isValid ? validColor : errorColor },
-                        ]}
-                    />
+                {!props.foldable && (
+                    <ValidationDot isValid={props.isValid} style={props.validationDotStyle} colors={props.colors} />
                 )}
             </View>
 
@@ -189,18 +182,11 @@ function MCQField(props: Props) {
                             </Text>
                         )}
                         {openFoldableIcon && renderOpenFoldableIcon(openFoldableIcon)}
-                        {props.isValid !== null && (
-                            <View
-                                style={[
-                                    {
-                                        position: 'absolute',
-                                        right: 35,
-                                        backgroundColor: props.isValid ? validColor : errorColor,
-                                    },
-                                    props.validationDotStyle,
-                                ]}
-                            />
-                        )}
+                        <ValidationDot
+                            isValid={props.isValid}
+                            style={{ position: 'absolute', right: 35 }}
+                            colors={props.colors}
+                        />
                     </TouchableOpacity>
 
                     {!isFolded && (
