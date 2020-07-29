@@ -1,28 +1,22 @@
 import React from 'react';
-import { View, Image, TouchableHighlight, Modal, ViewStyle, ImageStyle } from 'react-native';
+import { View, Image, TouchableHighlight, ViewStyle, ImageStyle } from 'react-native';
 
-import { FormUrl, ImageViewerProps } from '../types';
+import { FormUrl } from '../types';
 
 interface Props {
     pictures: FormUrl[];
-    imageViewerComponent?: React.ComponentType<ImageViewerProps>;
-    styles?: {
-        picturesContainer?: ViewStyle;
-        picture?: ImageStyle;
-    };
+    onPressPicture?: (index: number) => void;
+    containerStyle?: ViewStyle;
+    pictureStyle?: ImageStyle;
 }
 interface PictureSizes {
     [index: number]: { width: number; height: number };
 }
 
 function DescriptionPictures(props: Props) {
-    const { pictures, imageViewerComponent: ImageViewer } = props;
+    const { pictures } = props;
 
     const [pictureSizes, setPictureSizes] = React.useState<PictureSizes>({});
-    const [shouldDisplayViewer, setShouldDisplayViewer] = React.useState(false);
-    const [viewerIndex, setViewerIndex] = React.useState(0);
-
-    const dismissViewer = React.useCallback(() => setShouldDisplayViewer(false), []);
 
     // Initialize pictureSizes using the given dimensions or calculating them otherwise
     React.useEffect(() => {
@@ -52,38 +46,25 @@ function DescriptionPictures(props: Props) {
     // There are no pictures to render
     if (!pictures.length) return null;
 
-    const pictureUris = pictures.map((picture) => picture.src);
-
     return (
-        <View>
-            {ImageViewer && (
-                <Modal visible={shouldDisplayViewer} onRequestClose={dismissViewer}>
-                    <ImageViewer pictures={pictureUris} startingIndex={viewerIndex} goBack={dismissViewer} />
-                </Modal>
-            )}
+        <View style={[{ flex: 1, alignItems: 'center' }, props.containerStyle]}>
+            {pictures.map((formUrl, index) => {
+                if (!pictureSizes[index]) return null;
 
-            <View style={[{ flex: 1, alignItems: 'center' }]}>
-                {pictures.map((formUrl, index) => {
-                    if (!pictureSizes[index]) return null;
-
-                    const { height, width } = pictureSizes[index];
-                    if (!ImageViewer) {
-                        return <Image source={{ uri: formUrl.src }} style={{ marginBottom: 15, height, width }} />;
-                    }
-
-                    return (
-                        <TouchableHighlight
-                            key={formUrl.name}
-                            onPress={() => {
-                                setShouldDisplayViewer(true);
-                                setViewerIndex(index);
-                            }}
-                        >
-                            <Image source={{ uri: formUrl.src }} style={{ marginBottom: 15, height, width }} />
-                        </TouchableHighlight>
-                    );
-                })}
-            </View>
+                const { height, width } = pictureSizes[index];
+                return (
+                    <TouchableHighlight
+                        key={formUrl.name}
+                        onPress={() => props.onPressPicture && props.onPressPicture(index)}
+                        disabled={!props.onPressPicture}
+                    >
+                        <Image
+                            source={{ uri: formUrl.src }}
+                            style={[{ marginBottom: 15, height, width }, props.pictureStyle]}
+                        />
+                    </TouchableHighlight>
+                );
+            })}
         </View>
     );
 }

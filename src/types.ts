@@ -1,4 +1,3 @@
-import React from 'react';
 import { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
 export type Nullable<T> = T | null;
@@ -13,23 +12,13 @@ export interface FormUrl {
     };
 }
 
-export interface ImageViewerProps {
-    pictures: string[];
-    startingIndex: number;
-    goBack: () => void;
-}
-
 export interface DescriptionProps {
-    description?: {
-        text?: string;
-        pictures?: FormUrl[];
-    };
-    imageViewerComponent?: React.ComponentType<ImageViewerProps>;
-    styles?: {
-        text?: TextStyle;
-        picturesContainer?: ViewStyle;
-        picture?: ImageStyle;
-    };
+    text?: string;
+    pictures?: FormUrl[];
+    onPressPicture?: (index: number) => void;
+    textStyle?: TextStyle;
+    picturesContainerStyle?: ViewStyle;
+    pictureStyle?: ImageStyle;
 }
 
 export interface CommonStyles {

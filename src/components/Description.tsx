@@ -1,21 +1,21 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import R from 'ramda';
 
 import { DescriptionProps } from '../types';
 
 import DescriptionPictures from './DescriptionPictures';
 
 function Description(props: DescriptionProps) {
-    const { description, imageViewerComponent, styles } = props;
+    const { text, pictures, onPressPicture, textStyle, picturesContainerStyle, pictureStyle } = props;
     return (
         <View>
-            {description?.text && <Text style={styles?.text}>{description}</Text>}
-            {description?.pictures && (
+            {text && <Text style={textStyle}>{text}</Text>}
+            {pictures && (
                 <DescriptionPictures
-                    pictures={description?.pictures}
-                    imageViewerComponent={imageViewerComponent}
-                    styles={R.omit(['text'], styles)}
+                    pictures={pictures}
+                    onPressPicture={onPressPicture}
+                    containerStyle={picturesContainerStyle}
+                    pictureStyle={pictureStyle}
                 />
             )}
         </View>
