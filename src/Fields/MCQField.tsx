@@ -64,7 +64,7 @@ interface Props extends Styles {
     label?: string;
     possibleAnswers: string[];
     selectedAnswersIndices: number[];
-    isValid: Nullable<boolean>;
+    isValid?: Nullable<boolean>;
     onSelectAnswer: (answerIndex: number) => void;
     foldable?: boolean;
     openFoldableLabel?: (selectedAnswerQty: number) => string;

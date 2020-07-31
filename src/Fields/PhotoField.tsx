@@ -55,7 +55,7 @@ interface Props extends Styles {
     label?: string;
     pictureUris: string[];
     maxPictures?: number;
-    isValid: Nullable<boolean>;
+    isValid?: Nullable<boolean>;
     onOpenCamera: () => void;
     onPressPicture: (index: number) => void;
     openCameraIcon: React.ReactNode;

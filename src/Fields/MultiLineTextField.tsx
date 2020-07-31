@@ -21,7 +21,7 @@ interface Props extends Styles {
     descriptionProps: DescriptionProps;
     label?: string;
     value: string;
-    isValid: Nullable<boolean>;
+    isValid?: Nullable<boolean>;
     onChangeText: (text: string) => void;
     placeholder?: string;
     onFocus?: () => void;
