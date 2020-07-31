@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ViewStyle } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 
 import { Nullable } from '../types';
 import styles from '../SharedStyles';
@@ -11,7 +11,7 @@ interface Props {
         valid?: string;
         error?: string;
     };
-    style?: ViewStyle;
+    style?: StyleProp<ViewStyle>;
 }
 
 function ValidationDot(props: Props) {

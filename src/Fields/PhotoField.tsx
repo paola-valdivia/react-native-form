@@ -7,11 +7,10 @@ import {
     TouchableHighlight,
     TouchableOpacity,
     ViewStyle,
-    ImageStyle,
+    ImageStyle, StyleProp,
 } from 'react-native';
 
 import { CommonStyles, DescriptionProps, Nullable } from '../types';
-import { baseColors } from '../constants';
 import sharedStyles from '../SharedStyles';
 
 import Description from '../components/Description';
@@ -41,10 +40,10 @@ const styles = StyleSheet.create({
 });
 
 interface Styles extends CommonStyles {
-    imagesContainerStyle?: ViewStyle;
-    imageContainerStyle?: ViewStyle;
-    imageStyle?: ImageStyle;
-    openCameraButtonStyle: ViewStyle;
+    imagesContainerStyle?: StyleProp<ViewStyle>;
+    imageContainerStyle?: StyleProp<ViewStyle>;
+    imageStyle?: StyleProp<ImageStyle>;
+    openCameraButtonStyle: StyleProp<ViewStyle>;
     colors?: {
         valid?: string;
         error?: string;

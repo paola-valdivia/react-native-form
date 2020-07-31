@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableWithoutFeedback, TextStyle } from 'react-native';
+import { View, Text, TextInput, TouchableWithoutFeedback, TextStyle, StyleProp } from 'react-native';
 
 import { CommonStyles, DescriptionProps, Nullable } from '../types';
 import { baseColors } from '../constants';
@@ -9,7 +9,7 @@ import Description from '../components/Description';
 import ValidationDot from '../components/ValidationDot';
 
 interface Styles extends CommonStyles {
-    inputStyle?: TextStyle;
+    inputStyle?: StyleProp<TextStyle>;
     colors?: {
         valid?: string;
         error?: string;

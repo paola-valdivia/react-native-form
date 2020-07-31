@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Image, TouchableHighlight, ViewStyle, ImageStyle } from 'react-native';
+import { View, Image, TouchableHighlight, ViewStyle, ImageStyle, StyleProp } from 'react-native';
 
 import { FormUrl } from '../types';
 
 interface Props {
     pictures: FormUrl[];
     onPressPicture?: (index: number) => void;
-    containerStyle?: ViewStyle;
-    pictureStyle?: ImageStyle;
+    containerStyle?: StyleProp<ViewStyle>;
+    pictureStyle?: StyleProp<ImageStyle>;
 }
 interface PictureSizes {
     [index: number]: { width: number; height: number };

@@ -1,5 +1,14 @@
 import React from 'react';
-import { Text, View, TouchableWithoutFeedback, ViewStyle, TouchableOpacity, Animated, TextStyle } from 'react-native';
+import {
+    Text,
+    View,
+    TouchableWithoutFeedback,
+    ViewStyle,
+    TouchableOpacity,
+    Animated,
+    TextStyle,
+    StyleProp,
+} from 'react-native';
 
 import { CommonStyles, DescriptionProps, Nullable } from '../types';
 import { baseColors } from '../constants';
@@ -13,8 +22,8 @@ interface AnswerProps {
     isSelected: boolean;
     onPress: () => void;
     icon?: React.ReactNode;
-    containerStyle?: ViewStyle;
-    textStyle?: TextStyle;
+    containerStyle?: StyleProp<ViewStyle>;
+    textStyle?: StyleProp<TextStyle>;
 }
 
 /* Component used for individual answers */
@@ -34,12 +43,12 @@ function MCQAnswer(props: AnswerProps) {
 }
 
 interface Styles extends CommonStyles {
-    answerContainerStyle?: ViewStyle;
-    answerTextStyle?: TextStyle;
-    openFoldableBoxStyle?: ViewStyle;
-    openFoldableLabelStyle?: TextStyle;
-    closeFoldableBoxStyle?: ViewStyle;
-    closeFoldableLabelStyle?: TextStyle;
+    answerContainerStyle?: StyleProp<ViewStyle>;
+    answerTextStyle?: StyleProp<TextStyle>;
+    openFoldableBoxStyle?: StyleProp<ViewStyle>;
+    openFoldableLabelStyle?: StyleProp<TextStyle>;
+    closeFoldableBoxStyle?: StyleProp<ViewStyle>;
+    closeFoldableLabelStyle?: StyleProp<TextStyle>;
     colors?: {
         valid?: string;
         error?: string;

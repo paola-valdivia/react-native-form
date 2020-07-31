@@ -1,4 +1,4 @@
-import { ImageStyle, TextStyle, ViewStyle } from 'react-native';
+import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 export type Nullable<T> = T | null;
 
@@ -16,14 +16,14 @@ export interface DescriptionProps {
     text?: string;
     pictures?: FormUrl[];
     onPressPicture?: (index: number) => void;
-    textStyle?: TextStyle;
-    picturesContainerStyle?: ViewStyle;
-    pictureStyle?: ImageStyle;
+    textStyle?: StyleProp<TextStyle>;
+    picturesContainerStyle?: StyleProp<ViewStyle>;
+    pictureStyle?: StyleProp<ImageStyle>;
 }
 
 export interface CommonStyles {
-    containerStyle?: ViewStyle;
-    labelAndValidationContainerStyle?: ViewStyle;
-    labelStyle?: TextStyle;
-    validationDotStyle?: ViewStyle;
+    containerStyle?: StyleProp<ViewStyle>;
+    labelAndValidationContainerStyle?: StyleProp<ViewStyle>;
+    labelStyle?: StyleProp<TextStyle>;
+    validationDotStyle?: StyleProp<ViewStyle>;
 }
