@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableWithoutFeedback, TextStyle, StyleProp } from 'react-native';
+import { View, Text, TextInput, TouchableWithoutFeedback, TextStyle, StyleProp, TextInputProps } from 'react-native';
 
 import { CommonStyles, DescriptionProps, Nullable } from '../types';
 import { baseColors } from '../constants';
@@ -26,10 +26,21 @@ interface Props extends Styles {
     placeholder?: string;
     onFocus?: () => void;
     onBlur?: () => void;
+    textInputProps?: TextInputProps;
 }
 
 function MultiLineTextField(props: Props) {
-    const { descriptionProps, label, value, isValid, onChangeText, placeholder, onFocus, onBlur } = props;
+    const {
+        descriptionProps,
+        label,
+        value,
+        isValid,
+        onChangeText,
+        placeholder,
+        onFocus,
+        onBlur,
+        textInputProps,
+    } = props;
 
     const inputRef = React.useRef<TextInput>(null);
     const prevFocusRef = React.useRef<boolean>(false);
@@ -76,6 +87,7 @@ function MultiLineTextField(props: Props) {
                     multiline={true}
                     placeholderTextColor={props.colors?.placeholder || baseColors.placeholder}
                     style={[styles.inputText, props.inputStyle]}
+                    {...textInputProps}
                 />
             </View>
         </TouchableWithoutFeedback>
