@@ -1,24 +1,16 @@
-import React, { ReactElement } from 'react';
-import {
-    Animated,
-    StyleSheet,
-    TextStyle,
-    TouchableWithoutFeedback,
-    View,
-    ViewStyle,
-    TouchableOpacity,
-} from 'react-native';
+import React from 'react';
+import { Animated, StyleProp, StyleSheet, TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
 
-import { FormUrl, Nullable } from '../../../index';
-import sharedStyles, { colors } from './SharedStyles';
+import { CommonStyles, DescriptionProps, Nullable } from '../types';
+import sharedStyles from '../SharedStyles';
+
 import Description from './Description';
-import Icon from '../Icon';
+import ValidationDot from './ValidationDot';
 
 const styles = StyleSheet.create({
-    iconContainer: {
-        width: 35,
-        height: '100%',
-        justifyContent: 'center',
+    inputContainer: {
+        flexDirection: 'row',
+        height: 30,
     },
     innerContainer: {
         flex: 1,
@@ -31,35 +23,30 @@ const styles = StyleSheet.create({
     },
 });
 
-export interface TextFieldDesignProps {
-    label: string;
-    description?: string;
-    descriptionPictures?: FormUrl[];
-    iconName?: string;
-    iconSize?: number;
-    iconColor?: string;
-    minFontSize?: number;
-    maxFontSize?: number;
-    containerStyle?: ViewStyle;
-    inputContainerStyle?: ViewStyle;
-    iconContainerStyle?: ViewStyle;
-    inputStyle?: TextStyle;
-    textStyle?: TextStyle;
+interface Styles extends CommonStyles {
+    inputContainerStyle?: StyleProp<ViewStyle>;
+    colors?: {
+        valid?: string;
+        error?: string;
+    };
 }
 
-interface Props extends TextFieldDesignProps {
-    children: ReactElement;
-    isExpanded: boolean;
-    isFocused: boolean;
-    focus: () => void;
+interface Props extends Styles {
+    children: React.ReactNode;
+    descriptionProps: DescriptionProps;
+    label: string;
     isValid?: Nullable<boolean>;
-    isTextHidden: boolean; // Set the right icon
-    inputFocus: () => void;
-    switchTextHidden?: (isHidden: boolean) => void;
+    isExpanded: boolean;
+    onPress?: () => void;
+    onEndAnimation?: () => void;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+    minFontSize?: number;
+    maxFontSize?: number;
 }
 
 function TextFieldAnimation(props: Props) {
-    const { isExpanded, switchTextHidden, inputFocus } = props;
+    const { children, descriptionProps, label, isValid, isExpanded, onPress, onEndAnimation } = props;
 
     const animationValue = React.useRef(new Animated.Value(isExpanded ? 1 : 0));
 
@@ -68,28 +55,19 @@ function TextFieldAnimation(props: Props) {
             toValue: isExpanded ? 1 : 0,
             duration: 100,
             useNativeDriver: false,
-        }).start(isExpanded ? inputFocus : undefined);
-    }, [isExpanded, inputFocus]);
+        }).start(onEndAnimation);
+    }, [isExpanded, onEndAnimation]);
 
     const minFontSize = props.minFontSize || 11;
     const maxFontSize = props.maxFontSize || 13;
 
     return (
-        <TouchableWithoutFeedback onPress={() => !props.isFocused && props.focus()}>
-            <View
-                style={[sharedStyles.container, { shadowOpacity: props.isFocused ? 0.35 : 0.1 }, props.containerStyle]}
-            >
-                <Description description={props.description} descriptionPictures={props.descriptionPictures} />
-                <View style={[{ flexDirection: 'row', height: 30 }, props.inputContainerStyle]}>
-                    <View style={[styles.iconContainer, props.iconContainerStyle]}>
-                        {props.iconName && (
-                            <Icon
-                                name={props.iconName}
-                                size={props.iconSize || 18}
-                                color={props.iconColor || colors.main}
-                            />
-                        )}
-                    </View>
+        <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
+            <View style={[sharedStyles.container, props.containerStyle]}>
+                <Description {...descriptionProps} />
+                <View style={[styles.inputContainer, props.inputContainerStyle]}>
+                    {props.leftIcon}
+
                     <View style={styles.innerContainer}>
                         <Animated.View
                             style={[
@@ -106,20 +84,20 @@ function TextFieldAnimation(props: Props) {
                                 numberOfLines={1}
                                 style={[
                                     sharedStyles.labelText,
+                                    props.labelStyle,
                                     {
                                         fontSize: animationValue.current.interpolate({
                                             inputRange: [0, 1],
                                             outputRange: [maxFontSize, minFontSize],
                                         }),
                                     },
-                                    props.textStyle,
                                 ]}
                             >
-                                {props.label}
+                                {label}
                             </Animated.Text>
                         </Animated.View>
 
-                        {props.isExpanded && (
+                        {isExpanded && (
                             <Animated.View
                                 style={{
                                     height: animationValue.current.interpolate({
@@ -128,37 +106,22 @@ function TextFieldAnimation(props: Props) {
                                     }),
                                 }}
                             >
-                                {props.children}
+                                {children}
                             </Animated.View>
                         )}
                     </View>
 
-                    {switchTextHidden && props.isExpanded && (
-                        <TouchableOpacity
-                            style={{ marginLeft: 'auto', alignSelf: 'center' }}
-                            onPress={() => switchTextHidden(!props.isTextHidden)}
-                        >
-                            <Icon
-                                name={props.isTextHidden ? 'show_password' : 'hide_password'}
-                                size={22}
-                                color="#fff"
-                            />
-                        </TouchableOpacity>
-                    )}
+                    {props.rightIcon}
 
-                    {props.isValid !== null && (
-                        <View
-                            style={[
-                                sharedStyles.validationDot,
-                                styles.validationDot,
-                                { backgroundColor: props.isValid ? colors.valid : colors.error },
-                            ]}
-                        />
-                    )}
+                    <ValidationDot
+                        isValid={isValid}
+                        colors={props.colors}
+                        style={[styles.validationDot, props.validationDotStyle]}
+                    />
                 </View>
             </View>
         </TouchableWithoutFeedback>
     );
 }
 
-export default TextFieldAnimation;
+export default React.memo(TextFieldAnimation);

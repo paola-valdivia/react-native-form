@@ -1,37 +1,43 @@
 import React from 'react';
-import { TextInput, TextInputProps } from 'react-native';
-import R from 'ramda';
+import { StyleProp, TextInput, TextInputProps, TextStyle, ViewStyle } from 'react-native';
 
-import { Nullable } from '../../../index';
-import sharedStyles from './SharedStyles';
-import TextFieldAnimation, { TextFieldDesignProps } from '../components/TextFieldAnimation';
+import { CommonStyles, DescriptionProps, Nullable } from '../types';
+import sharedStyles from '../SharedStyles';
 
-interface Props extends TextFieldDesignProps {
+import TextFieldAnimation from '../components/TextFieldAnimation';
+
+interface Styles extends CommonStyles {
+    inputContainerStyle?: StyleProp<ViewStyle>;
+    inputStyle?: StyleProp<TextStyle>;
+}
+
+interface Props extends Styles {
+    descriptionProps: DescriptionProps;
+    label: string;
     value: string;
-    canHideText?: boolean;
     isValid?: Nullable<boolean>;
-    textInputProps?: TextInputProps;
     onChangeText?: (text: string) => void;
+    onFocus?: () => void;
     onBlur?: () => void;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+    textInputProps?: TextInputProps;
 }
 
 const SingleLineTextField = React.forwardRef((props: Props, ref) => {
-    const { value, isValid, onChangeText, canHideText, onBlur } = props;
+    const { value, isValid, onChangeText, onFocus, onBlur } = props;
 
     const inputRef = React.useRef<TextInput>(null);
     const prevFocusRef = React.useRef(false);
 
-    const [isTextHidden, setTextHide] = React.useState(canHideText || false);
     const [isFocused, setFocus] = React.useState(false);
 
-    /* capture the ref */
-    React.useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        if (!ref) return () => {};
-
-        typeof ref === 'function' ? ref(inputRef) : (ref.current = inputRef.current);
-        return () => (typeof ref === 'function' ? ref(null) : (ref.current = null));
-    }, [ref]);
+    // Hook to modify the ref forwarded to the parent
+    React.useImperativeHandle(ref, () => ({
+        focus: () => {
+            setFocus(true);
+        },
+    }));
 
     const inputFocus = React.useCallback(() => {
         if (inputRef.current && isFocused) {
@@ -39,31 +45,36 @@ const SingleLineTextField = React.forwardRef((props: Props, ref) => {
         }
     }, [isFocused]);
 
-    /* run onBlur functions */
+    /* run focus/blur functions */
     React.useEffect(() => {
-        if (onBlur && prevFocusRef.current && !isFocused) {
-            onBlur();
-        }
+        if (onFocus && !prevFocusRef.current && isFocused) onFocus();
+        if (onBlur && prevFocusRef.current && !isFocused) onBlur();
+
         prevFocusRef.current = isFocused;
-    }, [onBlur, isFocused]);
+    }, [onFocus, onBlur, isFocused]);
+
+    const onPress = React.useCallback(() => !isFocused && setFocus(true), [isFocused]);
+    const isExpanded = React.useMemo(() => isFocused || !!value, [isFocused, value]);
 
     return (
         <TextFieldAnimation
-            {...R.omit(['ref'], props)}
-            isExpanded={isFocused || !R.isEmpty(value)}
+            descriptionProps={props.descriptionProps}
+            label={props.label}
             isValid={isValid === undefined ? null : isValid}
-            isFocused={isFocused}
-            focus={() => setFocus(true)}
-            isTextHidden={isTextHidden}
-            switchTextHidden={canHideText ? setTextHide : undefined}
-            inputFocus={inputFocus}
+            isExpanded={isExpanded}
+            onPress={onPress}
+            onEndAnimation={isExpanded ? inputFocus : undefined}
+            leftIcon={props.leftIcon}
+            rightIcon={props.rightIcon}
+            containerStyle={props.containerStyle}
+            inputContainerStyle={props.inputContainerStyle}
         >
             <TextInput
                 ref={inputRef}
                 value={value}
                 onChangeText={onChangeText}
                 style={[sharedStyles.inputText, props.inputStyle]}
-                secureTextEntry={isTextHidden || false}
+                onFocus={() => setFocus(true)}
                 onBlur={() => setFocus(false)}
                 {...props.textInputProps}
             />
