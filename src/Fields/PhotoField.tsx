@@ -7,7 +7,8 @@ import {
     TouchableHighlight,
     TouchableOpacity,
     ViewStyle,
-    ImageStyle, StyleProp,
+    ImageStyle,
+    StyleProp,
 } from 'react-native';
 
 import { CommonStyles, DescriptionProps, Nullable } from '../types';
@@ -56,7 +57,7 @@ interface Props extends Styles {
     pictureUris: string[];
     maxPictures?: number;
     isValid?: Nullable<boolean>;
-    onOpenCamera: () => void;
+    onPressOpenCamera: () => void;
     onPressPicture: (index: number) => void;
     openCameraIcon: React.ReactNode;
 }
@@ -93,7 +94,7 @@ function PhotoField(props: Props) {
                 })}
                 {(!props.maxPictures || props.pictureUris.length < props.maxPictures) && (
                     <TouchableOpacity
-                        onPress={props.onOpenCamera}
+                        onPress={props.onPressOpenCamera}
                         style={[styles.openCameraButton, props.openCameraButtonStyle]}
                     >
                         {props.openCameraIcon}
