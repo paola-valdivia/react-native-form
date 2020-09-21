@@ -1,5 +1,5 @@
 import React from 'react';
-import { Keyboard, Text, View, ViewStyle, StyleProp, TextStyle } from 'react-native';
+import { Keyboard, Text, ViewStyle, StyleProp, TextStyle } from 'react-native';
 
 import { CommonStyles, DescriptionProps, Nullable } from '../types';
 import sharedStyles from '../SharedStyles';
@@ -30,21 +30,19 @@ function PickerField(props: Props) {
     }, [openPicker]);
 
     return (
-        <View>
-            <TextFieldAnimation
-                descriptionProps={props.descriptionProps}
-                label={props.label}
-                isValid={isValid === undefined ? null : isValid}
-                isExpanded={!!value}
-                onPress={onPress}
-                leftIcon={props.leftIcon}
-                rightIcon={props.rightIcon}
-                containerStyle={props.containerStyle}
-                inputContainerStyle={props.inputContainerStyle}
-            >
-                <Text style={[sharedStyles.inputText, props.inputStyle]}>{value}</Text>
-            </TextFieldAnimation>
-        </View>
+        <TextFieldAnimation
+            descriptionProps={props.descriptionProps}
+            label={props.label}
+            isValid={isValid === undefined ? null : isValid}
+            isExpanded={!!value}
+            onPress={onPress}
+            leftIcon={props.leftIcon}
+            rightIcon={props.rightIcon}
+            containerStyle={props.containerStyle}
+            inputContainerStyle={props.inputContainerStyle}
+        >
+            <Text style={[sharedStyles.inputText, props.inputStyle]}>{value}</Text>
+        </TextFieldAnimation>
     );
 }
 
