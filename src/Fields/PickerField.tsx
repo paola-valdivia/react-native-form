@@ -1,5 +1,5 @@
 import React from 'react';
-import { Keyboard, Text, View, ViewStyle, StyleProp } from 'react-native';
+import { Keyboard, Text, View, ViewStyle, StyleProp, TextStyle } from 'react-native';
 
 import { CommonStyles, DescriptionProps, Nullable } from '../types';
 import sharedStyles from '../SharedStyles';
@@ -8,6 +8,7 @@ import TextFieldAnimation from '../components/TextFieldAnimation';
 
 interface Styles extends CommonStyles {
     inputContainerStyle?: StyleProp<ViewStyle>;
+    inputStyle?: StyleProp<TextStyle>;
 }
 
 interface Props extends Styles {
@@ -41,7 +42,7 @@ function PickerField(props: Props) {
                 containerStyle={props.containerStyle}
                 inputContainerStyle={props.inputContainerStyle}
             >
-                <Text style={sharedStyles.inputText}>{value}</Text>
+                <Text style={[sharedStyles.inputText, props.inputStyle]}>{value}</Text>
             </TextFieldAnimation>
         </View>
     );
