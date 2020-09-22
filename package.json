@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/Mobeye/react-native-form#readme",
   "devDependencies": {
+    "@react-native-community/datetimepicker": "^3.0.2",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/ramda": "^0.27.7",
     "@types/react": "^16.9.41",
@@ -49,9 +50,11 @@
   },
   "dependencies": {
     "moment": "^2.27.0",
-    "ramda": "^0.27.0"
+    "ramda": "^0.27.0",
+    "react-native-modal": "^11.5.6"
   },
   "peerDependencies": {
+    "@react-native-community/datetimepicker": ">= 2.0.0",
     "react": ">= 16.9.0",
     "react-native": ">= 0.60.0"
   },
