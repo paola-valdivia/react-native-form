@@ -33,7 +33,7 @@ interface Styles extends CommonStyles {
 
 interface Props extends Styles {
     children: React.ReactNode;
-    descriptionProps: DescriptionProps;
+    descriptionProps?: DescriptionProps;
     label: string;
     isValid?: Nullable<boolean>;
     isExpanded: boolean;

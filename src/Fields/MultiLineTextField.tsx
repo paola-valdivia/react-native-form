@@ -18,7 +18,7 @@ interface Styles extends CommonStyles {
 }
 
 interface Props extends Styles {
-    descriptionProps: DescriptionProps;
+    descriptionProps?: DescriptionProps;
     label?: string;
     value: string;
     isValid?: Nullable<boolean>;

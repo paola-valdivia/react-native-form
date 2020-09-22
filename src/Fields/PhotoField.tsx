@@ -52,7 +52,7 @@ interface Styles extends CommonStyles {
 }
 
 interface Props extends Styles {
-    descriptionProps: DescriptionProps;
+    descriptionProps?: DescriptionProps;
     label?: string;
     pictureUris: string[];
     maxPictures?: number;
