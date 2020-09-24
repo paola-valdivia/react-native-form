@@ -7,7 +7,7 @@ module.exports = {
             jsx: true,
         },
     },
-    plugins: ['@typescript-eslint', 'react', 'react-native'],
+    plugins: ['@typescript-eslint', 'react', 'react-native', 'prettier'],
     extends: [
         'eslint:recommended',
         '@react-native-community',
@@ -20,6 +20,7 @@ module.exports = {
     rules: {
         'comma-dangle': ['warn', 'only-multiline'],
         radix: 0,
+
         // Prettier
         'prettier/prettier': [
             'warn',
@@ -32,8 +33,16 @@ module.exports = {
                 printWidth: 120,
             },
         ],
+
         // Typescript
         '@typescript-eslint/no-use-before-define': 0,
         '@typescript-eslint/ban-types': 1,
+
+        // React
+        "react-hooks/rules-of-hooks": 2, // Checks rules of Hooks
+        "react-hooks/exhaustive-deps": 1, // Checks effect dependencies
+
+        // react-native
+        'react-native/no-inline-styles': 0,
     },
 };
