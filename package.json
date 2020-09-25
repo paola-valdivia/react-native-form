@@ -1,5 +1,5 @@
 {
-  "name": "@mobeye/react-native-form",
+  "name": "react-native-form-fields",
   "version": "1.0.0",
   "description": "react-native form to render our surveys",
   "main": "build/index.js",
