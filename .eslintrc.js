@@ -28,7 +28,7 @@ module.exports = {
                 arrowParens: 'always',
                 bracketSpacing: true,
                 singleQuote: true,
-                trailingComma: 'all',
+                trailingComma: 'es5',
                 tabWidth: 4,
                 printWidth: 120,
             },

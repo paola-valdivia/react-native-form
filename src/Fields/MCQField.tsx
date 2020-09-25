@@ -1,33 +1,15 @@
 import React from 'react';
-import {
-    Text,
-    View,
-    TouchableWithoutFeedback,
-    ViewStyle,
-    TouchableOpacity,
-    Animated,
-    TextStyle,
-    StyleProp,
-} from 'react-native';
+import { Text, View, TouchableWithoutFeedback, TouchableOpacity, Animated } from 'react-native';
 
-import { CommonStyles, DescriptionProps, Nullable } from '../types';
+import { MCQAnswerProps, MCQFieldProps } from '../types';
 import { baseColors } from '../constants';
 import styles from '../SharedStyles';
 
 import Description from '../components/Description';
 import ValidationDot from '../components/ValidationDot';
 
-interface AnswerProps {
-    text: string;
-    isSelected: boolean;
-    onPress: () => void;
-    icon?: React.ReactNode;
-    containerStyle?: StyleProp<ViewStyle>;
-    textStyle?: StyleProp<TextStyle>;
-}
-
 /* Component used for individual answers */
-function MCQAnswer(props: AnswerProps) {
+function MCQAnswer(props: MCQAnswerProps) {
     // const answerColor: string = isChecked ? colors.main : colors.inactive;
     // const backgroundColor: string = isChecked ? colors.background : '#fff';
     // const iconColor: string = isChecked ? colors.main : '#fff';
@@ -42,42 +24,7 @@ function MCQAnswer(props: AnswerProps) {
     );
 }
 
-interface Styles extends CommonStyles {
-    answerContainerStyle?: StyleProp<ViewStyle>;
-    answerTextStyle?: StyleProp<TextStyle>;
-    openFoldableBoxStyle?: StyleProp<ViewStyle>;
-    openFoldableLabelStyle?: StyleProp<TextStyle>;
-    closeFoldableBoxStyle?: StyleProp<ViewStyle>;
-    closeFoldableLabelStyle?: StyleProp<TextStyle>;
-    colors?: {
-        valid?: string;
-        error?: string;
-        active?: string;
-        inactive?: string;
-        activeBackground?: string;
-        inactiveBackground?: string;
-    };
-}
-
-interface Props extends Styles {
-    descriptionProps?: DescriptionProps;
-    label?: string;
-    possibleAnswers: string[];
-    selectedAnswersIndices: number[];
-    isValid?: Nullable<boolean>;
-    onSelectAnswer: (answerIndex: number) => void;
-    foldable?: boolean;
-    openFoldableLabel?: (selectedAnswerQty: number) => string;
-    closeFoldableLabel?: (selectedAnswerQty: number) => string;
-    answerIcon?: React.ReactNode;
-    activeOpenFoldableIcon?: React.ReactNode;
-    inactiveOpenFoldableIcon?: React.ReactNode;
-    activeCloseFoldableIcon?: React.ReactNode;
-    inactiveCloseFoldableIcon?: React.ReactNode;
-    shouldAnimateOpenFoldableIcon?: boolean;
-}
-
-function MCQField(props: Props) {
+function MCQField(props: MCQFieldProps) {
     const selectedAnswerQty = props.selectedAnswersIndices.length;
 
     const arrowRotationCoefficient = React.useRef(new Animated.Value(0));

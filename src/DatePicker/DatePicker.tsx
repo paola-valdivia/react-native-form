@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { Button, Platform, StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+
+import { DatePickerProps } from '../types';
 
 const styles = StyleSheet.create({
     modal: {
@@ -23,27 +25,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export interface Styles {
-    // iOS only
-    modalStyle?: StyleProp<ViewStyle>;
-    datePickerIOSContainerStyle?: StyleProp<ViewStyle>;
-    datePickerIOSHeaderStyle?: StyleProp<ViewStyle>;
-}
-interface Props extends Styles {
-    isVisible: boolean;
-    value: Date;
-    onClosePicker: (date?: Date) => void;
-
-    // Android only
-    minimumDate?: Date;
-    maximumDate?: Date;
-
-    // iOS only
-    iosClearButtonText?: string;
-    iosValidateButtonText?: string;
-}
-
-function DatePicker(props: Props) {
+function DatePicker(props: DatePickerProps) {
     const [iosTempValue, setIosTempValue] = React.useState(props.value);
     // const iosDateControlValueRef = React.useRef(props.value);
 

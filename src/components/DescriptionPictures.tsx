@@ -1,19 +1,13 @@
 import React from 'react';
-import { View, Image, TouchableHighlight, ViewStyle, ImageStyle, StyleProp } from 'react-native';
+import { View, Image, TouchableHighlight } from 'react-native';
 
-import { FormUrl } from '../types';
+import { DescriptionPicturesProps } from '../types';
 
-interface Props {
-    pictures: FormUrl[];
-    onPressPicture?: (index: number) => void;
-    containerStyle?: StyleProp<ViewStyle>;
-    pictureStyle?: StyleProp<ImageStyle>;
-}
 interface PictureSizes {
     [index: number]: { width: number; height: number };
 }
 
-function DescriptionPictures(props: Props) {
+function DescriptionPictures(props: DescriptionPicturesProps) {
     const { pictures } = props;
 
     const [pictureSizes, setPictureSizes] = React.useState<PictureSizes>({});

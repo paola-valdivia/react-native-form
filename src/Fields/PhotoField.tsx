@@ -1,17 +1,7 @@
 import React from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TouchableHighlight,
-    TouchableOpacity,
-    ViewStyle,
-    ImageStyle,
-    StyleProp,
-} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableHighlight, TouchableOpacity } from 'react-native';
 
-import { CommonStyles, DescriptionProps, Nullable } from '../types';
+import { PhotoFieldProps } from '../types';
 import sharedStyles from '../SharedStyles';
 
 import Description from '../components/Description';
@@ -40,29 +30,7 @@ const styles = StyleSheet.create({
     },
 });
 
-interface Styles extends CommonStyles {
-    imagesContainerStyle?: StyleProp<ViewStyle>;
-    imageContainerStyle?: StyleProp<ViewStyle>;
-    imageStyle?: StyleProp<ImageStyle>;
-    openCameraButtonStyle: StyleProp<ViewStyle>;
-    colors?: {
-        valid?: string;
-        error?: string;
-    };
-}
-
-interface Props extends Styles {
-    descriptionProps?: DescriptionProps;
-    label?: string;
-    pictureUris: string[];
-    maxPictures?: number;
-    isValid?: Nullable<boolean>;
-    onPressOpenCamera: () => void;
-    onPressPicture: (index: number) => void;
-    openCameraIcon: React.ReactNode;
-}
-
-function PhotoField(props: Props) {
+function PhotoField(props: PhotoFieldProps) {
     return (
         <View style={props.containerStyle}>
             <Description {...props.descriptionProps} />

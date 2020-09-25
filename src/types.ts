@@ -1,8 +1,9 @@
-import { ImageStyle, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import { ImageStyle, StyleProp, TextInputProps, TextStyle, ViewStyle } from 'react-native';
+import React from 'react';
 
 export type Nullable<T> = T | null;
 
-export interface FormUrl {
+interface FormUrl {
     readonly src: string;
     readonly name?: string;
     readonly size?: number;
@@ -12,6 +13,20 @@ export interface FormUrl {
     };
 }
 
+interface CommonStyles {
+    containerStyle?: StyleProp<ViewStyle>;
+    labelAndValidationContainerStyle?: StyleProp<ViewStyle>;
+    labelStyle?: StyleProp<TextStyle>;
+    validationDotStyle?: StyleProp<ViewStyle>;
+}
+
+/* Description */
+export interface DescriptionPicturesProps {
+    pictures: FormUrl[];
+    onPressPicture?: (index: number) => void;
+    containerStyle?: StyleProp<ViewStyle>;
+    pictureStyle?: StyleProp<ImageStyle>;
+}
 export interface DescriptionProps {
     text?: string;
     pictures?: FormUrl[];
@@ -21,9 +36,188 @@ export interface DescriptionProps {
     pictureStyle?: StyleProp<ImageStyle>;
 }
 
-export interface CommonStyles {
+/* TextFieldAnimation */
+export interface TextFieldAnimationStyles extends CommonStyles {
+    inputContainerStyle?: StyleProp<ViewStyle>;
+    colors?: {
+        valid?: string;
+        error?: string;
+    };
+}
+export interface TextFieldAnimationProps extends TextFieldAnimationStyles {
+    children: React.ReactNode;
+    descriptionProps?: DescriptionProps;
+    label: string;
+    isValid?: Nullable<boolean>;
+    isExpanded: boolean;
+    onPress?: () => void;
+    onEndAnimation?: () => void;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+    minFontSize?: number;
+    maxFontSize?: number;
+}
+
+/* MCQField */
+export interface MCQAnswerProps {
+    text: string;
+    isSelected: boolean;
+    onPress: () => void;
+    icon?: React.ReactNode;
     containerStyle?: StyleProp<ViewStyle>;
-    labelAndValidationContainerStyle?: StyleProp<ViewStyle>;
-    labelStyle?: StyleProp<TextStyle>;
-    validationDotStyle?: StyleProp<ViewStyle>;
+    textStyle?: StyleProp<TextStyle>;
+}
+export interface MCQFieldStyles extends CommonStyles {
+    answerContainerStyle?: StyleProp<ViewStyle>;
+    answerTextStyle?: StyleProp<TextStyle>;
+    openFoldableBoxStyle?: StyleProp<ViewStyle>;
+    openFoldableLabelStyle?: StyleProp<TextStyle>;
+    closeFoldableBoxStyle?: StyleProp<ViewStyle>;
+    closeFoldableLabelStyle?: StyleProp<TextStyle>;
+    colors?: {
+        valid?: string;
+        error?: string;
+        active?: string;
+        inactive?: string;
+        activeBackground?: string;
+        inactiveBackground?: string;
+    };
+}
+export interface MCQFieldProps extends MCQFieldStyles {
+    descriptionProps?: DescriptionProps;
+    label?: string;
+    possibleAnswers: string[];
+    selectedAnswersIndices: number[];
+    isValid?: Nullable<boolean>;
+    onSelectAnswer: (answerIndex: number) => void;
+    foldable?: boolean;
+    openFoldableLabel?: (selectedAnswerQty: number) => string;
+    closeFoldableLabel?: (selectedAnswerQty: number) => string;
+    answerIcon?: React.ReactNode;
+    activeOpenFoldableIcon?: React.ReactNode;
+    inactiveOpenFoldableIcon?: React.ReactNode;
+    activeCloseFoldableIcon?: React.ReactNode;
+    inactiveCloseFoldableIcon?: React.ReactNode;
+    shouldAnimateOpenFoldableIcon?: boolean;
+}
+
+/* MultiLineTextField */
+export interface MultiLineTextFieldStyles extends CommonStyles {
+    inputStyle?: StyleProp<TextStyle>;
+    colors?: {
+        valid?: string;
+        error?: string;
+        placeholder?: string;
+    };
+}
+export interface MultiLineTextFieldProps extends MultiLineTextFieldStyles {
+    descriptionProps?: DescriptionProps;
+    label?: string;
+    value: string;
+    isValid?: Nullable<boolean>;
+    onChangeText: (text: string) => void;
+    placeholder?: string;
+    onFocus?: () => void;
+    onBlur?: () => void;
+    textInputProps?: TextInputProps;
+}
+
+/* PhotoField */
+export interface PhotoFieldStyles extends CommonStyles {
+    imagesContainerStyle?: StyleProp<ViewStyle>;
+    imageContainerStyle?: StyleProp<ViewStyle>;
+    imageStyle?: StyleProp<ImageStyle>;
+    openCameraButtonStyle: StyleProp<ViewStyle>;
+    colors?: {
+        valid?: string;
+        error?: string;
+    };
+}
+export interface PhotoFieldProps extends PhotoFieldStyles {
+    descriptionProps?: DescriptionProps;
+    label?: string;
+    pictureUris: string[];
+    maxPictures?: number;
+    isValid?: Nullable<boolean>;
+    onPressOpenCamera: () => void;
+    onPressPicture: (index: number) => void;
+    openCameraIcon: React.ReactNode;
+}
+
+/* PickerField */
+export interface PickerFieldStyles extends CommonStyles {
+    inputContainerStyle?: StyleProp<ViewStyle>;
+    inputStyle?: StyleProp<TextStyle>;
+}
+export interface PickerFieldProps extends PickerFieldStyles {
+    descriptionProps?: DescriptionProps;
+    label: string;
+    value: string;
+    isValid?: Nullable<boolean>;
+    openPicker: () => void;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+}
+
+/* SingleLineTextField */
+export interface SingleLineTextFieldStyles extends CommonStyles {
+    inputContainerStyle?: StyleProp<ViewStyle>;
+    inputStyle?: StyleProp<TextStyle>;
+}
+export interface SingleLineTextFieldProps extends SingleLineTextFieldStyles {
+    descriptionProps?: DescriptionProps;
+    label: string;
+    value: string;
+    isValid?: Nullable<boolean>;
+    onChangeText?: (text: string) => void;
+    onFocus?: () => void;
+    onBlur?: () => void;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+    textInputProps?: TextInputProps;
+}
+
+export interface DatePickerStyles {
+    // iOS only
+    modalStyle?: StyleProp<ViewStyle>;
+    datePickerIOSContainerStyle?: StyleProp<ViewStyle>;
+    datePickerIOSHeaderStyle?: StyleProp<ViewStyle>;
+}
+export interface DatePickerProps extends DatePickerStyles {
+    isVisible: boolean;
+    value: Date;
+    onClosePicker: (date?: Date) => void;
+
+    // Android only
+    minimumDate?: Date;
+    maximumDate?: Date;
+
+    // iOS only
+    iosClearButtonText?: string;
+    iosValidateButtonText?: string;
+}
+
+/* DatePickerField */
+export interface DatePickerFieldStyles extends CommonStyles, DatePickerStyles {
+    pickerFieldContainerStyle?: StyleProp<ViewStyle>;
+    inputContainerStyle?: StyleProp<ViewStyle>;
+    inputStyle?: StyleProp<TextStyle>;
+}
+export interface DatePickerFieldProps extends DatePickerFieldStyles {
+    descriptionProps: DescriptionProps;
+    label: string;
+    value: Date;
+    isValid?: Nullable<boolean>;
+    onChange: (date?: Date) => void;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+    dateStringFormat?: string;
+
+    // Android only
+    minimumDate?: Date;
+    maximumDate?: Date;
+
+    // iOS only
+    iosClearButtonText?: string;
+    iosValidateButtonText?: string;
 }

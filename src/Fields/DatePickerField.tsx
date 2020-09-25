@@ -1,37 +1,12 @@
 import React from 'react';
-import { StyleProp, TextStyle, View, ViewStyle } from 'react-native';
+import { View } from 'react-native';
 import moment from 'moment';
 
 import PickerField from './PickerField';
-import DatePicker, { Styles as DatePickerStyles } from '../DatePicker/DatePicker';
-import { CommonStyles, DescriptionProps, Nullable } from '../types';
+import DatePicker from '../DatePicker/DatePicker';
+import { DatePickerFieldProps } from '../types';
 
-interface Styles extends CommonStyles, DatePickerStyles {
-    pickerFieldContainerStyle?: StyleProp<ViewStyle>;
-    inputContainerStyle?: StyleProp<ViewStyle>;
-    inputStyle?: StyleProp<TextStyle>;
-}
-
-interface Props extends Styles {
-    descriptionProps: DescriptionProps;
-    label: string;
-    value: Date;
-    isValid?: Nullable<boolean>;
-    onChange: (date?: Date) => void;
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
-    dateStringFormat?: string;
-
-    // Android only
-    minimumDate?: Date;
-    maximumDate?: Date;
-
-    // iOS only
-    iosClearButtonText?: string;
-    iosValidateButtonText?: string;
-}
-
-function DatePickerField(props: Props) {
+function DatePickerField(props: DatePickerFieldProps) {
     const { onChange } = props;
 
     const [showPicker, setShowPicker] = React.useState(false);

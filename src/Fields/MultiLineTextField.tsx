@@ -1,35 +1,14 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableWithoutFeedback, TextStyle, StyleProp, TextInputProps } from 'react-native';
+import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native';
 
-import { CommonStyles, DescriptionProps, Nullable } from '../types';
+import { MultiLineTextFieldProps } from '../types';
 import { baseColors } from '../constants';
 import styles from '../SharedStyles';
 
 import Description from '../components/Description';
 import ValidationDot from '../components/ValidationDot';
 
-interface Styles extends CommonStyles {
-    inputStyle?: StyleProp<TextStyle>;
-    colors?: {
-        valid?: string;
-        error?: string;
-        placeholder?: string;
-    };
-}
-
-interface Props extends Styles {
-    descriptionProps?: DescriptionProps;
-    label?: string;
-    value: string;
-    isValid?: Nullable<boolean>;
-    onChangeText: (text: string) => void;
-    placeholder?: string;
-    onFocus?: () => void;
-    onBlur?: () => void;
-    textInputProps?: TextInputProps;
-}
-
-function MultiLineTextField(props: Props) {
+function MultiLineTextField(props: MultiLineTextFieldProps) {
     const {
         descriptionProps,
         label,

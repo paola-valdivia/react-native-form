@@ -1,30 +1,12 @@
 import React from 'react';
-import { StyleProp, TextInput, TextInputProps, TextStyle, ViewStyle } from 'react-native';
+import { TextInput } from 'react-native';
 
-import { CommonStyles, DescriptionProps, Nullable } from '../types';
+import { SingleLineTextFieldProps } from '../types';
 import sharedStyles from '../SharedStyles';
 
 import TextFieldAnimation from '../components/TextFieldAnimation';
 
-interface Styles extends CommonStyles {
-    inputContainerStyle?: StyleProp<ViewStyle>;
-    inputStyle?: StyleProp<TextStyle>;
-}
-
-interface Props extends Styles {
-    descriptionProps?: DescriptionProps;
-    label: string;
-    value: string;
-    isValid?: Nullable<boolean>;
-    onChangeText?: (text: string) => void;
-    onFocus?: () => void;
-    onBlur?: () => void;
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
-    textInputProps?: TextInputProps;
-}
-
-const SingleLineTextField = React.forwardRef((props: Props, ref) => {
+const SingleLineTextField = React.forwardRef((props: SingleLineTextFieldProps, ref) => {
     const { value, isValid, onChangeText, onFocus, onBlur } = props;
 
     const inputRef = React.useRef<TextInput>(null);

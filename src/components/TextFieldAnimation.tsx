@@ -1,7 +1,7 @@
 import React from 'react';
-import { Animated, StyleProp, StyleSheet, TouchableWithoutFeedback, View, ViewStyle } from 'react-native';
+import { Animated, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
-import { CommonStyles, DescriptionProps, Nullable } from '../types';
+import { TextFieldAnimationProps } from '../types';
 import sharedStyles from '../SharedStyles';
 
 import Description from './Description';
@@ -23,29 +23,7 @@ const styles = StyleSheet.create({
     },
 });
 
-interface Styles extends CommonStyles {
-    inputContainerStyle?: StyleProp<ViewStyle>;
-    colors?: {
-        valid?: string;
-        error?: string;
-    };
-}
-
-interface Props extends Styles {
-    children: React.ReactNode;
-    descriptionProps?: DescriptionProps;
-    label: string;
-    isValid?: Nullable<boolean>;
-    isExpanded: boolean;
-    onPress?: () => void;
-    onEndAnimation?: () => void;
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
-    minFontSize?: number;
-    maxFontSize?: number;
-}
-
-function TextFieldAnimation(props: Props) {
+function TextFieldAnimation(props: TextFieldAnimationProps) {
     const { children, descriptionProps, label, isValid, isExpanded, onPress, onEndAnimation } = props;
 
     const animationValue = React.useRef(new Animated.Value(isExpanded ? 1 : 0));

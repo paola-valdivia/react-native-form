@@ -1,27 +1,12 @@
 import React from 'react';
-import { Keyboard, Text, ViewStyle, StyleProp, TextStyle } from 'react-native';
+import { Keyboard, Text } from 'react-native';
 
-import { CommonStyles, DescriptionProps, Nullable } from '../types';
+import { PickerFieldProps } from '../types';
 import sharedStyles from '../SharedStyles';
 
 import TextFieldAnimation from '../components/TextFieldAnimation';
 
-interface Styles extends CommonStyles {
-    inputContainerStyle?: StyleProp<ViewStyle>;
-    inputStyle?: StyleProp<TextStyle>;
-}
-
-interface Props extends Styles {
-    descriptionProps?: DescriptionProps;
-    label: string;
-    value: string;
-    isValid?: Nullable<boolean>;
-    openPicker: () => void;
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
-}
-
-function PickerField(props: Props) {
+function PickerField(props: PickerFieldProps) {
     const { value, isValid, openPicker } = props;
 
     const onPress = React.useCallback(() => {
