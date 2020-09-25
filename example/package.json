@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "16.13.1",
-    "react-native": "0.63.2"
+    "react-native": "0.63.2",
+    "react-native-form-fields": "file:../../react-native-form"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -48,5 +49,12 @@
       "json",
       "node"
     ]
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "tabWidth": 4,
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "es5"
   }
 }
