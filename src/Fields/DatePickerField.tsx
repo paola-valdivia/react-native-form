@@ -23,7 +23,6 @@ function DatePickerField(props: DatePickerFieldProps) {
     return (
         <View>
             <PickerField
-                descriptionProps={props.descriptionProps}
                 label={props.label}
                 value={moment(props.value).format(props.dateStringFormat || 'DD/MM/YYYY')}
                 isValid={props.isValid}
@@ -33,6 +32,12 @@ function DatePickerField(props: DatePickerFieldProps) {
                 containerStyle={props.containerStyle}
                 inputContainerStyle={props.inputContainerStyle}
                 inputStyle={props.inputStyle}
+                descriptionText={props.descriptionText}
+                descriptionPictures={props.descriptionPictures}
+                onPressDescriptionPicture={props.onPressDescriptionPicture}
+                descriptionTextStyle={props.descriptionTextStyle}
+                descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
+                descriptionPictureStyle={props.descriptionPictureStyle}
             />
             <DatePicker
                 isVisible={showPicker}

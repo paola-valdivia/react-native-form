@@ -6,16 +6,23 @@ import { DescriptionProps } from '../types';
 import DescriptionPictures from './DescriptionPictures';
 
 function Description(props: DescriptionProps) {
-    const { text, pictures, onPressPicture, textStyle, picturesContainerStyle, pictureStyle } = props;
+    const {
+        descriptionText,
+        descriptionPictures,
+        onPressDescriptionPicture,
+        descriptionTextStyle,
+        descriptionPicturesContainerStyle,
+        descriptionPictureStyle,
+    } = props;
     return (
         <View>
-            {text && <Text style={textStyle}>{text}</Text>}
-            {pictures && (
+            {descriptionText && <Text style={descriptionTextStyle}>{descriptionText}</Text>}
+            {descriptionPictures && (
                 <DescriptionPictures
-                    pictures={pictures}
-                    onPressPicture={onPressPicture}
-                    containerStyle={picturesContainerStyle}
-                    pictureStyle={pictureStyle}
+                    pictures={descriptionPictures}
+                    onPressPicture={onPressDescriptionPicture}
+                    containerStyle={descriptionPicturesContainerStyle}
+                    pictureStyle={descriptionPictureStyle}
                 />
             )}
         </View>

@@ -9,11 +9,7 @@ import Description from '../components/Description';
 import ValidationDot from '../components/ValidationDot';
 
 /* Component used for individual answers */
-function MCQAnswer(props: MCQAnswerProps) {
-    // const answerColor: string = isChecked ? colors.main : colors.inactive;
-    // const backgroundColor: string = isChecked ? colors.background : '#fff';
-    // const iconColor: string = isChecked ? colors.main : '#fff';
-
+const MCQAnswer = React.memo((props: MCQAnswerProps) => {
     return (
         <TouchableWithoutFeedback onPress={props.onPress}>
             <View style={[styles.answerContainer, props.containerStyle]}>
@@ -22,9 +18,11 @@ function MCQAnswer(props: MCQAnswerProps) {
             </View>
         </TouchableWithoutFeedback>
     );
-}
+});
 
 function MCQField(props: MCQFieldProps) {
+    const { onSelectAnswer } = props;
+
     const selectedAnswerQty = props.selectedAnswersIndices.length;
 
     const arrowRotationCoefficient = React.useRef(new Animated.Value(0));
@@ -57,6 +55,8 @@ function MCQField(props: MCQFieldProps) {
         closeFoldableIcon = props.inactiveCloseFoldableIcon;
     }
 
+    const onPressAnswer = React.useCallback((index: number) => () => onSelectAnswer(index), [onSelectAnswer]);
+
     const renderOpenFoldableIcon = (icon: React.ReactNode): React.ReactNode => {
         if (!icon) return null;
         if (!props.shouldAnimateOpenFoldableIcon) {
@@ -85,7 +85,14 @@ function MCQField(props: MCQFieldProps) {
 
     return (
         <View style={[styles.container, props.containerStyle]}>
-            <Description {...props.descriptionProps} />
+            <Description
+                descriptionText={props.descriptionText}
+                descriptionPictures={props.descriptionPictures}
+                onPressDescriptionPicture={props.onPressDescriptionPicture}
+                descriptionTextStyle={props.descriptionTextStyle}
+                descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
+                descriptionPictureStyle={props.descriptionPictureStyle}
+            />
 
             <View style={[styles.labelAndValidationContainer, props.labelAndValidationContainerStyle]}>
                 {props.label && (
@@ -100,14 +107,25 @@ function MCQField(props: MCQFieldProps) {
 
             {!props.foldable ? (
                 props.possibleAnswers.map((possibleAnswer: string, index: number) => {
+                    const isSelected = props.selectedAnswersIndices.includes(index);
+                    const icon = isSelected ? props.activeAnswerIcon : props.inactiveAnswerIcon;
+                    const color = isSelected ? activeColor : inactiveColor;
+                    const backgroundColor = isSelected ? activeBackgroundColor : inactiveBackgroundColor;
                     return (
                         <MCQAnswer
+                            key={`answer_${index}`}
                             text={possibleAnswer}
-                            isSelected={props.selectedAnswersIndices.includes(index)}
-                            onPress={() => props.onSelectAnswer(index)}
-                            icon={props.answerIcon}
-                            containerStyle={props.answerContainerStyle}
-                            textStyle={props.answerTextStyle}
+                            onPress={onPressAnswer(index)}
+                            icon={icon}
+                            containerStyle={[
+                                {
+                                    borderColor: color,
+                                    backgroundColor,
+                                    marginTop: index > 0 ? 10 : 0,
+                                },
+                                props.answerContainerStyle,
+                            ]}
+                            textStyle={[{ color }, props.answerTextStyle]}
                         />
                     );
                 })
@@ -148,14 +166,25 @@ function MCQField(props: MCQFieldProps) {
                     {!isFolded && (
                         <>
                             {props.possibleAnswers.map((possibleAnswer, index) => {
+                                const isSelected = props.selectedAnswersIndices.includes(index);
+                                const icon = isSelected ? props.activeAnswerIcon : props.inactiveAnswerIcon;
+                                const color = isSelected ? activeColor : inactiveColor;
+                                const backgroundColor = isSelected ? activeBackgroundColor : inactiveBackgroundColor;
                                 return (
                                     <MCQAnswer
+                                        key={`answer_${index}`}
                                         text={possibleAnswer}
-                                        isSelected={props.selectedAnswersIndices.includes(index)}
-                                        onPress={() => props.onSelectAnswer(index)}
-                                        icon={props.answerIcon}
-                                        containerStyle={props.answerContainerStyle}
-                                        textStyle={props.answerTextStyle}
+                                        onPress={onPressAnswer(index)}
+                                        icon={icon}
+                                        containerStyle={[
+                                            {
+                                                borderColor: color,
+                                                backgroundColor,
+                                                marginTop: index > 0 ? 10 : 0,
+                                            },
+                                            props.answerContainerStyle,
+                                        ]}
+                                        textStyle={[{ color }, props.answerTextStyle]}
                                     />
                                 );
                             })}
@@ -165,7 +194,7 @@ function MCQField(props: MCQFieldProps) {
                                     onPress={toggleFold}
                                 >
                                     <Text style={[styles.answerText, { color: '#fff' }]}>
-                                        {props.closeFoldableLabel}
+                                        {props.closeFoldableLabel(selectedAnswerQty)}
                                     </Text>
                                     {closeFoldableIcon}
                                 </TouchableOpacity>

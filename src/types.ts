@@ -28,12 +28,12 @@ export interface DescriptionPicturesProps {
     pictureStyle?: StyleProp<ImageStyle>;
 }
 export interface DescriptionProps {
-    text?: string;
-    pictures?: FormUrl[];
-    onPressPicture?: (index: number) => void;
-    textStyle?: StyleProp<TextStyle>;
-    picturesContainerStyle?: StyleProp<ViewStyle>;
-    pictureStyle?: StyleProp<ImageStyle>;
+    descriptionText?: string;
+    descriptionPictures?: FormUrl[];
+    onPressDescriptionPicture?: (index: number) => void;
+    descriptionTextStyle?: StyleProp<TextStyle>;
+    descriptionPicturesContainerStyle?: StyleProp<ViewStyle>;
+    descriptionPictureStyle?: StyleProp<ImageStyle>;
 }
 
 /* TextFieldAnimation */
@@ -44,9 +44,8 @@ export interface TextFieldAnimationStyles extends CommonStyles {
         error?: string;
     };
 }
-export interface TextFieldAnimationProps extends TextFieldAnimationStyles {
+export interface TextFieldAnimationProps extends DescriptionProps, TextFieldAnimationStyles {
     children: React.ReactNode;
-    descriptionProps?: DescriptionProps;
     label: string;
     isValid?: Nullable<boolean>;
     isExpanded: boolean;
@@ -61,7 +60,6 @@ export interface TextFieldAnimationProps extends TextFieldAnimationStyles {
 /* MCQField */
 export interface MCQAnswerProps {
     text: string;
-    isSelected: boolean;
     onPress: () => void;
     icon?: React.ReactNode;
     containerStyle?: StyleProp<ViewStyle>;
@@ -83,8 +81,7 @@ export interface MCQFieldStyles extends CommonStyles {
         inactiveBackground?: string;
     };
 }
-export interface MCQFieldProps extends MCQFieldStyles {
-    descriptionProps?: DescriptionProps;
+export interface MCQFieldProps extends DescriptionProps, MCQFieldStyles {
     label?: string;
     possibleAnswers: string[];
     selectedAnswersIndices: number[];
@@ -93,7 +90,8 @@ export interface MCQFieldProps extends MCQFieldStyles {
     foldable?: boolean;
     openFoldableLabel?: (selectedAnswerQty: number) => string;
     closeFoldableLabel?: (selectedAnswerQty: number) => string;
-    answerIcon?: React.ReactNode;
+    activeAnswerIcon?: React.ReactNode;
+    inactiveAnswerIcon?: React.ReactNode;
     activeOpenFoldableIcon?: React.ReactNode;
     inactiveOpenFoldableIcon?: React.ReactNode;
     activeCloseFoldableIcon?: React.ReactNode;
@@ -110,8 +108,7 @@ export interface MultiLineTextFieldStyles extends CommonStyles {
         placeholder?: string;
     };
 }
-export interface MultiLineTextFieldProps extends MultiLineTextFieldStyles {
-    descriptionProps?: DescriptionProps;
+export interface MultiLineTextFieldProps extends DescriptionProps, MultiLineTextFieldStyles {
     label?: string;
     value: string;
     isValid?: Nullable<boolean>;
@@ -133,8 +130,7 @@ export interface PhotoFieldStyles extends CommonStyles {
         error?: string;
     };
 }
-export interface PhotoFieldProps extends PhotoFieldStyles {
-    descriptionProps?: DescriptionProps;
+export interface PhotoFieldProps extends DescriptionProps, PhotoFieldStyles {
     label?: string;
     pictureUris: string[];
     maxPictures?: number;
@@ -148,9 +144,12 @@ export interface PhotoFieldProps extends PhotoFieldStyles {
 export interface PickerFieldStyles extends CommonStyles {
     inputContainerStyle?: StyleProp<ViewStyle>;
     inputStyle?: StyleProp<TextStyle>;
+    colors?: {
+        valid?: string;
+        error?: string;
+    };
 }
-export interface PickerFieldProps extends PickerFieldStyles {
-    descriptionProps?: DescriptionProps;
+export interface PickerFieldProps extends DescriptionProps, PickerFieldStyles {
     label: string;
     value: string;
     isValid?: Nullable<boolean>;
@@ -163,9 +162,12 @@ export interface PickerFieldProps extends PickerFieldStyles {
 export interface SingleLineTextFieldStyles extends CommonStyles {
     inputContainerStyle?: StyleProp<ViewStyle>;
     inputStyle?: StyleProp<TextStyle>;
+    colors?: {
+        valid?: string;
+        error?: string;
+    };
 }
-export interface SingleLineTextFieldProps extends SingleLineTextFieldStyles {
-    descriptionProps?: DescriptionProps;
+export interface SingleLineTextFieldProps extends DescriptionProps, SingleLineTextFieldStyles {
     label: string;
     value: string;
     isValid?: Nullable<boolean>;
@@ -202,9 +204,12 @@ export interface DatePickerFieldStyles extends CommonStyles, DatePickerStyles {
     pickerFieldContainerStyle?: StyleProp<ViewStyle>;
     inputContainerStyle?: StyleProp<ViewStyle>;
     inputStyle?: StyleProp<TextStyle>;
+    colors?: {
+        valid?: string;
+        error?: string;
+    };
 }
-export interface DatePickerFieldProps extends DatePickerFieldStyles {
-    descriptionProps: DescriptionProps;
+export interface DatePickerFieldProps extends DescriptionProps, DatePickerFieldStyles {
     label: string;
     value: Date;
     isValid?: Nullable<boolean>;

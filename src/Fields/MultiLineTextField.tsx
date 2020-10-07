@@ -9,17 +9,7 @@ import Description from '../components/Description';
 import ValidationDot from '../components/ValidationDot';
 
 function MultiLineTextField(props: MultiLineTextFieldProps) {
-    const {
-        descriptionProps,
-        label,
-        value,
-        isValid,
-        onChangeText,
-        placeholder,
-        onFocus,
-        onBlur,
-        textInputProps,
-    } = props;
+    const { label, value, isValid, onChangeText, placeholder, onFocus, onBlur, textInputProps } = props;
 
     const inputRef = React.useRef<TextInput>(null);
     const prevFocusRef = React.useRef<boolean>(false);
@@ -45,14 +35,19 @@ function MultiLineTextField(props: MultiLineTextFieldProps) {
     return (
         <TouchableWithoutFeedback onPress={onPress}>
             <View style={[styles.container, { shadowOpacity: isFocused ? 0.35 : 0.1 }, props.containerStyle]}>
-                <Description {...descriptionProps} />
+                <Description
+                    descriptionText={props.descriptionText}
+                    descriptionPictures={props.descriptionPictures}
+                    onPressDescriptionPicture={props.onPressDescriptionPicture}
+                    descriptionTextStyle={props.descriptionTextStyle}
+                    descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
+                    descriptionPictureStyle={props.descriptionPictureStyle}
+                />
 
                 <View style={[styles.labelAndValidationContainer, props.labelAndValidationContainerStyle]}>
-                    {label && (
-                        <Text numberOfLines={1} style={[styles.labelText, props.labelStyle]}>
-                            {label}
-                        </Text>
-                    )}
+                    <Text numberOfLines={1} style={[styles.labelText, props.labelStyle]}>
+                        {label}
+                    </Text>
                     <ValidationDot isValid={isValid} style={props.validationDotStyle} colors={props.colors} />
                 </View>
 

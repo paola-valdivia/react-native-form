@@ -1,7 +1,5 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { baseColors } from './constants';
-
-const { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
     container: {
@@ -14,12 +12,7 @@ export default StyleSheet.create({
         shadowRadius: 14,
         elevation: 5,
     },
-    fieldContainer: {
-        width: 0.95 * width,
-        marginTop: 10,
-    },
     descriptionText: {
-        fontFamily: 'Roboto-Regular',
         fontSize: 14,
         color: baseColors.description,
         marginBottom: 10,
@@ -30,7 +23,6 @@ export default StyleSheet.create({
         marginBottom: 12,
     },
     labelText: {
-        fontFamily: 'Roboto-Bold',
         fontSize: 14,
         color: baseColors.label,
     },
@@ -41,7 +33,6 @@ export default StyleSheet.create({
         borderRadius: 10,
     },
     inputText: {
-        fontFamily: 'Roboto-Bold',
         fontSize: 14,
         padding: 0,
         color: baseColors.main,
@@ -57,7 +48,6 @@ export default StyleSheet.create({
         padding: 10,
     },
     answerText: {
-        fontFamily: 'Roboto-Medium',
         fontSize: 13,
         flex: 1,
     },

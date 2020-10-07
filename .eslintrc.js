@@ -35,6 +35,7 @@ module.exports = {
         ],
 
         // Typescript
+        "@typescript-eslint/no-explicit-any": 0,
         '@typescript-eslint/no-use-before-define': 0,
         '@typescript-eslint/ban-types': 1,
 

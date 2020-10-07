@@ -16,7 +16,6 @@ function PickerField(props: PickerFieldProps) {
 
     return (
         <TextFieldAnimation
-            descriptionProps={props.descriptionProps}
             label={props.label}
             isValid={isValid === undefined ? null : isValid}
             isExpanded={!!value}
@@ -25,6 +24,12 @@ function PickerField(props: PickerFieldProps) {
             rightIcon={props.rightIcon}
             containerStyle={props.containerStyle}
             inputContainerStyle={props.inputContainerStyle}
+            descriptionText={props.descriptionText}
+            descriptionPictures={props.descriptionPictures}
+            onPressDescriptionPicture={props.onPressDescriptionPicture}
+            descriptionTextStyle={props.descriptionTextStyle}
+            descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
+            descriptionPictureStyle={props.descriptionPictureStyle}
         >
             <Text style={[sharedStyles.inputText, props.inputStyle]}>{value}</Text>
         </TextFieldAnimation>

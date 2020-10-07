@@ -28,13 +28,14 @@ module.exports = {
         arrowParens: 'always',
         bracketSpacing: true,
         singleQuote: true,
-        trailingComma: 'all',
+        trailingComma: 'es5',
         tabWidth: 4,
         printWidth: 120,
       },
     ],
 
     // Typescript
+    "@typescript-eslint/no-explicit-any": 0,
     '@typescript-eslint/no-use-before-define': 0,
     '@typescript-eslint/ban-types': 1,
 

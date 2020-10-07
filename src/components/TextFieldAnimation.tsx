@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 });
 
 function TextFieldAnimation(props: TextFieldAnimationProps) {
-    const { children, descriptionProps, label, isValid, isExpanded, onPress, onEndAnimation } = props;
+    const { children, label, isValid, isExpanded, onPress, onEndAnimation } = props;
 
     const animationValue = React.useRef(new Animated.Value(isExpanded ? 1 : 0));
 
@@ -42,7 +42,15 @@ function TextFieldAnimation(props: TextFieldAnimationProps) {
     return (
         <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
             <View style={[sharedStyles.container, props.containerStyle]}>
-                <Description {...descriptionProps} />
+                <Description
+                    descriptionText={props.descriptionText}
+                    descriptionPictures={props.descriptionPictures}
+                    onPressDescriptionPicture={props.onPressDescriptionPicture}
+                    descriptionTextStyle={props.descriptionTextStyle}
+                    descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
+                    descriptionPictureStyle={props.descriptionPictureStyle}
+                />
+
                 <View style={[styles.inputContainer, props.inputContainerStyle]}>
                     {props.leftIcon}
 

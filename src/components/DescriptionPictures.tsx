@@ -48,7 +48,7 @@ function DescriptionPictures(props: DescriptionPicturesProps) {
                 const { height, width } = pictureSizes[index];
                 return (
                     <TouchableHighlight
-                        key={formUrl.name}
+                        key={formUrl.src}
                         onPress={() => props.onPressPicture && props.onPressPicture(index)}
                         disabled={!props.onPressPicture}
                     >

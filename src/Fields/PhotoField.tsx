@@ -33,7 +33,14 @@ const styles = StyleSheet.create({
 function PhotoField(props: PhotoFieldProps) {
     return (
         <View style={props.containerStyle}>
-            <Description {...props.descriptionProps} />
+            <Description
+                descriptionText={props.descriptionText}
+                descriptionPictures={props.descriptionPictures}
+                onPressDescriptionPicture={props.onPressDescriptionPicture}
+                descriptionTextStyle={props.descriptionTextStyle}
+                descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
+                descriptionPictureStyle={props.descriptionPictureStyle}
+            />
 
             <View
                 style={[
