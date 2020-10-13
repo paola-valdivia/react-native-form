@@ -124,7 +124,6 @@ export interface PhotoFieldStyles extends CommonStyles {
     imagesContainerStyle?: StyleProp<ViewStyle>;
     imageContainerStyle?: StyleProp<ViewStyle>;
     imageStyle?: StyleProp<ImageStyle>;
-    openCameraButtonStyle: StyleProp<ViewStyle>;
     colors?: {
         valid?: string;
         error?: string;
@@ -133,11 +132,9 @@ export interface PhotoFieldStyles extends CommonStyles {
 export interface PhotoFieldProps extends DescriptionProps, PhotoFieldStyles {
     label?: string;
     pictureUris: string[];
-    maxPictures?: number;
     isValid?: Nullable<boolean>;
-    onPressOpenCamera: () => void;
-    onPressPicture: (index: number) => void;
-    openCameraIcon: React.ReactNode;
+    onPressPicture?: (index: number) => void;
+    openCameraButton: React.ReactNode;
 }
 
 /* PickerField */

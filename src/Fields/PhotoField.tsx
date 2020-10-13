@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 
 import { PhotoFieldProps } from '../types';
 import sharedStyles from '../SharedStyles';
@@ -60,21 +60,14 @@ function PhotoField(props: PhotoFieldProps) {
                     return (
                         <TouchableHighlight
                             key={'picture_' + index}
-                            onPress={() => props.onPressPicture(index)}
+                            onPress={() => props.onPressPicture && props.onPressPicture(index)}
                             style={[styles.imageContainer, props.imageContainerStyle]}
                         >
                             <Image source={{ uri: pictureUri }} style={[styles.image, props.imageStyle]} />
                         </TouchableHighlight>
                     );
                 })}
-                {(!props.maxPictures || props.pictureUris.length < props.maxPictures) && (
-                    <TouchableOpacity
-                        onPress={props.onPressOpenCamera}
-                        style={[styles.openCameraButton, props.openCameraButtonStyle]}
-                    >
-                        {props.openCameraIcon}
-                    </TouchableOpacity>
-                )}
+                {props.openCameraButton}
             </View>
         </View>
     );
