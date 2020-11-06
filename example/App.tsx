@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { View, StyleSheet, ScrollView, SafeAreaView, Text } from 'react-native';
+import { StyleSheet, ScrollView, SafeAreaView, Text } from 'react-native';
 import { MCQField, MultiLineTextField, SingleLineTextField } from 'react-native-form-fields';
 
 const styles = StyleSheet.create({
@@ -53,7 +53,7 @@ const descriptionPictures = [
     },
 ];
 
-const App = (): React.ReactNode => {
+const App = (): React.ReactElement => {
     const reducer = (state: State, action: Partial<State>): State => ({ ...state, ...action });
 
     const initialState: State = {
