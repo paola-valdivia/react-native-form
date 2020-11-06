@@ -1,7 +1,7 @@
 {
-  "name": "react-native-form-fields",
+  "name": "@mobeye/react-native-form-fields",
   "version": "1.0.0",
-  "description": "react-native form to render our surveys",
+  "description": "Optimized field components for react-native forms",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "files": [
@@ -21,6 +21,13 @@
     "type": "git",
     "url": "git+https://github.com/Mobeye/react-native-form.git"
   },
+  "keywords": [
+    "react",
+    "react-native",
+    "form",
+    "field",
+    "fields"
+  ],
   "author": {
     "name": "Mobeye",
     "company": "Mobeye"
