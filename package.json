@@ -10,11 +10,10 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "lint": "eslint .",
+    "lint": "eslint --max-warnings 0 .",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\"",
-    "prepublishOnly": "npm run lint",
+    "prepublishOnly": "npm run lint && npm run build",
     "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
   "repository": {
