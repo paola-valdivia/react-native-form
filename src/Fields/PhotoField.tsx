@@ -37,6 +37,7 @@ function PhotoField(props: PhotoFieldProps) {
                 descriptionText={props.descriptionText}
                 descriptionPictures={props.descriptionPictures}
                 onPressDescriptionPicture={props.onPressDescriptionPicture}
+                descriptionContainerStyle={props.descriptionContainerStyle}
                 descriptionTextStyle={props.descriptionTextStyle}
                 descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
                 descriptionPictureStyle={props.descriptionPictureStyle}

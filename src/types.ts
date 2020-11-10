@@ -31,6 +31,7 @@ export interface DescriptionProps {
     descriptionText?: string;
     descriptionPictures?: FormUrl[];
     onPressDescriptionPicture?: (index: number) => void;
+    descriptionContainerStyle?: StyleProp<ViewStyle>;
     descriptionTextStyle?: StyleProp<TextStyle>;
     descriptionPicturesContainerStyle?: StyleProp<ViewStyle>;
     descriptionPictureStyle?: StyleProp<ImageStyle>;

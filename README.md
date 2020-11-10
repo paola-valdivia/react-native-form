@@ -1,6 +1,6 @@
-# react-native-form
+# @mobeye/react-native-form-fields
 
-Generic form fields components with opinionated design for react-native apps
+Optimized field components with nice design for react-native forms
 
 ## Table of contents
 
@@ -34,6 +34,7 @@ Those props are present in every field and will be immediately passed to the `De
 | `descriptionText`                   | `string`                  | (Optional) Text to display     |
 | `descriptionPictures`               | `[FormUrl](#formurl)[]`   | (Optional) Pictures to display |
 | `onPressDescriptionPicture`         | `(index: number) => void` | (Optional) callback fired when user touches a picture. Can be used to open a viewer |
+| `descriptionContainerStyle`         | `ViewStyle`               | (Optional) Style for the Description container |
 | `descriptionTextStyle`              | `TextStyle`               | (Optional) Style for the text  |
 | `descriptionPicturesContainerStyle` | `ViewStyle`               | (Optional) Style for the view containing the pictures |
 | `descriptionPictureStyle`           | `ImageStyle`              | (Optional) Style for the Image components rendering the pictures |
