@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text, View, TouchableWithoutFeedback, TouchableOpacity, Animated } from 'react-native';
+import R from 'ramda';
 
 import { MCQAnswerProps, MCQFieldProps } from '../types';
 import { baseColors } from '../constants';
 import styles from '../SharedStyles';
 
-import Description from '../components/Description';
+import Description, { descriptionProps } from '../components/Description';
 import ValidationDot from '../components/ValidationDot';
 
 /* Component used for individual answers */
@@ -85,15 +86,7 @@ function MCQField(props: MCQFieldProps) {
 
     return (
         <View style={[styles.container, props.containerStyle]}>
-            <Description
-                descriptionText={props.descriptionText}
-                descriptionPictures={props.descriptionPictures}
-                onPressDescriptionPicture={props.onPressDescriptionPicture}
-                descriptionContainerStyle={props.descriptionContainerStyle}
-                descriptionTextStyle={props.descriptionTextStyle}
-                descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
-                descriptionPictureStyle={props.descriptionPictureStyle}
-            />
+            <Description {...R.pick(descriptionProps, props)} />
 
             <View style={[styles.labelAndValidationContainer, props.labelAndValidationContainerStyle]}>
                 {props.label && (

@@ -8,9 +8,14 @@ interface PictureSizes {
 }
 
 function DescriptionPictures(props: DescriptionPicturesProps) {
-    const { pictures } = props;
+    const { pictures, onPressPicture, ImageViewer } = props;
 
     const [pictureSizes, setPictureSizes] = React.useState<PictureSizes>({});
+
+    // ImageViewer component management
+    const [displayViewer, setDisplayViewer] = React.useState(false);
+    const [viewerIndex, setViewerIndex] = React.useState(0);
+    const hideViewer = React.useCallback(() => setDisplayViewer(false), []);
 
     // Initialize pictureSizes using the given dimensions or calculating them otherwise
     React.useEffect(() => {
@@ -37,28 +42,42 @@ function DescriptionPictures(props: DescriptionPicturesProps) {
         setPictureSizes(newPictureSizes);
     }, [pictures]);
 
+    const pictureUris = React.useMemo(() => pictures.map((formUrl) => formUrl.src), [pictures]);
+
     // There are no pictures to render
-    if (!pictures.length) return null;
+    if (!pictureUris.length) return null;
 
     return (
-        <View style={[{ flex: 1, alignItems: 'center' }, props.containerStyle]}>
-            {pictures.map((formUrl, index) => {
-                if (!pictureSizes[index]) return null;
+        <View>
+            {ImageViewer && (
+                <ImageViewer
+                    isVisible={displayViewer}
+                    pictureUris={pictureUris}
+                    startingIndex={viewerIndex}
+                    goBack={hideViewer}
+                />
+            )}
 
-                const { height, width } = pictureSizes[index];
-                return (
-                    <TouchableHighlight
-                        key={formUrl.src}
-                        onPress={() => props.onPressPicture && props.onPressPicture(index)}
-                        disabled={!props.onPressPicture}
-                    >
-                        <Image
-                            source={{ uri: formUrl.src }}
-                            style={[{ marginBottom: 15, height, width }, props.pictureStyle]}
-                        />
-                    </TouchableHighlight>
-                );
-            })}
+            <View style={[{ flex: 1, alignItems: 'center' }, props.containerStyle]}>
+                {pictureUris.map((uri, index) => {
+                    if (!pictureSizes[index]) return null;
+
+                    const { height, width } = pictureSizes[index];
+                    return (
+                        <TouchableHighlight
+                            key={uri}
+                            onPress={() => {
+                                setDisplayViewer(true);
+                                setViewerIndex(index);
+                                onPressPicture && onPressPicture(index);
+                            }}
+                            disabled={!ImageViewer}
+                        >
+                            <Image source={{ uri }} style={[{ marginBottom: 15, height, width }, props.pictureStyle]} />
+                        </TouchableHighlight>
+                    );
+                })}
+            </View>
         </View>
     );
 }

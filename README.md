@@ -32,8 +32,9 @@ Those props are present in every field and will be immediately passed to the `De
 | Property                            | Type                      | Description                    |
 | ----------------------------------- | ------------------------- | ------------------------------ |
 | `descriptionText`                   | `string`                  | (Optional) Text to display     |
-| `descriptionPictures`               | `[FormUrl](#formurl)[]`   | (Optional) Pictures to display |
-| `onPressDescriptionPicture`         | `(index: number) => void` | (Optional) callback fired when user touches a picture. Can be used to open a viewer |
+| `descriptionPictures`               | `FormUrl[]`               | (Optional) Pictures to display. See [FormUrl](#formurl) |
+| `descriptionImageViewer`            | `FC<ImageViewerProps>`    | (Optional) If an ImageViewer component is provided, it will open on picture press. See [ImageViewerProps](#imageviewerprops) |
+| `onPressDescriptionPicture`         | `(index: number) => void` | (Optional) callback fired when user touches a picture |
 | `descriptionContainerStyle`         | `ViewStyle`               | (Optional) Style for the Description container |
 | `descriptionTextStyle`              | `TextStyle`               | (Optional) Style for the text  |
 | `descriptionPicturesContainerStyle` | `ViewStyle`               | (Optional) Style for the view containing the pictures |
@@ -49,6 +50,19 @@ Custom type used to pass pictures to the `Description` component
 | `name`       | `string`                            | (Optional) Not used for now         |
 | `size`       | `number`                            | (Optional) Not used for now         |
 | `dimensions` | `{ width: number; height: number }` | (Optional) If not provided will be computed on initial render and every time `pictures` changes |
+
+#### `ImageViewerProps`
+
+Props of the custom ImageViewer component passed using `descriptionImageViewer`
+Those 4 props will be passed to the component by the `DescriptionPictures` component
+It is up to you to use them or not
+
+ | Property         | Type          | Description                                           |
+ | ---------------- | ------------- | ----------------------------------------------------- |
+ | `isVisible`      | `boolean`     | (Required) Show/Hide ImageViewer                      |
+ | `pictureUris`    | `string[]`    | (Required) List of the description pictures           |
+ | `startingIndex`  | `number`      | (Required) index of the picture pressed by the user   |
+ | `goBack`         | `() => void`  | (Required) callback to dismiss the viewer             |
 
 ### Styles
 

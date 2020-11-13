@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
+import R from 'ramda';
 
 import { PhotoFieldProps } from '../types';
 import sharedStyles from '../SharedStyles';
 
-import Description from '../components/Description';
+import Description, { descriptionProps } from '../components/Description';
 import ValidationDot from '../components/ValidationDot';
 
 const styles = StyleSheet.create({
@@ -33,15 +34,7 @@ const styles = StyleSheet.create({
 function PhotoField(props: PhotoFieldProps) {
     return (
         <View style={props.containerStyle}>
-            <Description
-                descriptionText={props.descriptionText}
-                descriptionPictures={props.descriptionPictures}
-                onPressDescriptionPicture={props.onPressDescriptionPicture}
-                descriptionContainerStyle={props.descriptionContainerStyle}
-                descriptionTextStyle={props.descriptionTextStyle}
-                descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
-                descriptionPictureStyle={props.descriptionPictureStyle}
-            />
+            <Description {...R.pick(descriptionProps, props)} />
 
             <View
                 style={[

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Animated, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import R from 'ramda';
 
 import { TextFieldAnimationProps } from '../types';
 import sharedStyles from '../SharedStyles';
 
-import Description from './Description';
+import Description, { descriptionProps } from './Description';
 import ValidationDot from './ValidationDot';
 
 const styles = StyleSheet.create({
@@ -42,15 +43,7 @@ function TextFieldAnimation(props: TextFieldAnimationProps) {
     return (
         <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
             <View style={[sharedStyles.container, props.containerStyle]}>
-                <Description
-                    descriptionText={props.descriptionText}
-                    descriptionPictures={props.descriptionPictures}
-                    onPressDescriptionPicture={props.onPressDescriptionPicture}
-                    descriptionContainerStyle={props.descriptionContainerStyle}
-                    descriptionTextStyle={props.descriptionTextStyle}
-                    descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
-                    descriptionPictureStyle={props.descriptionPictureStyle}
-                />
+                <Description {...R.pick(descriptionProps, props)} />
 
                 <View style={[styles.inputContainer, props.inputContainerStyle]}>
                     {props.leftIcon}

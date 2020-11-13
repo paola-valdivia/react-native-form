@@ -1,5 +1,5 @@
 import { ImageStyle, StyleProp, TextInputProps, TextStyle, ViewStyle } from 'react-native';
-import React from 'react';
+import React, { FC } from 'react';
 
 export type Nullable<T> = T | null;
 
@@ -21,15 +21,23 @@ interface CommonStyles {
 }
 
 /* Description */
+export interface ImageViewerProps {
+    isVisible: boolean;
+    pictureUris: string[];
+    startingIndex: number;
+    goBack: () => void;
+}
 export interface DescriptionPicturesProps {
     pictures: FormUrl[];
     onPressPicture?: (index: number) => void;
+    ImageViewer?: FC<ImageViewerProps>;
     containerStyle?: StyleProp<ViewStyle>;
     pictureStyle?: StyleProp<ImageStyle>;
 }
 export interface DescriptionProps {
     descriptionText?: string;
     descriptionPictures?: FormUrl[];
+    descriptionImageViewer?: FC<ImageViewerProps>;
     onPressDescriptionPicture?: (index: number) => void;
     descriptionContainerStyle?: StyleProp<ViewStyle>;
     descriptionTextStyle?: StyleProp<TextStyle>;

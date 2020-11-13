@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native';
+import R from 'ramda';
 
 import { MultiLineTextFieldProps } from '../types';
 import { baseColors } from '../constants';
 import styles from '../SharedStyles';
 
-import Description from '../components/Description';
+import Description, { descriptionProps } from '../components/Description';
 import ValidationDot from '../components/ValidationDot';
 
 function MultiLineTextField(props: MultiLineTextFieldProps) {
@@ -35,15 +36,7 @@ function MultiLineTextField(props: MultiLineTextFieldProps) {
     return (
         <TouchableWithoutFeedback onPress={onPress}>
             <View style={[styles.container, { shadowOpacity: isFocused ? 0.35 : 0.1 }, props.containerStyle]}>
-                <Description
-                    descriptionText={props.descriptionText}
-                    descriptionPictures={props.descriptionPictures}
-                    onPressDescriptionPicture={props.onPressDescriptionPicture}
-                    descriptionContainerStyle={props.descriptionContainerStyle}
-                    descriptionTextStyle={props.descriptionTextStyle}
-                    descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
-                    descriptionPictureStyle={props.descriptionPictureStyle}
-                />
+                <Description {...R.pick(descriptionProps, props)} />
 
                 <View style={[styles.labelAndValidationContainer, props.labelAndValidationContainerStyle]}>
                     <Text numberOfLines={1} style={[styles.labelText, props.labelStyle]}>

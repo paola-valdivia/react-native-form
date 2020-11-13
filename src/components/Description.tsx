@@ -6,6 +6,17 @@ import styles from '../SharedStyles';
 
 import DescriptionPictures from './DescriptionPictures';
 
+export const descriptionProps: (keyof DescriptionProps)[] = [
+    'descriptionText',
+    'descriptionPictures',
+    'descriptionImageViewer',
+    'onPressDescriptionPicture',
+    'descriptionContainerStyle',
+    'descriptionTextStyle',
+    'descriptionPicturesContainerStyle',
+    'descriptionPictureStyle',
+];
+
 function Description(props: DescriptionProps) {
     return (
         <View style={[styles.container, props.descriptionContainerStyle]}>
@@ -14,6 +25,7 @@ function Description(props: DescriptionProps) {
                 <DescriptionPictures
                     pictures={props.descriptionPictures}
                     onPressPicture={props.onPressDescriptionPicture}
+                    ImageViewer={props.descriptionImageViewer}
                     containerStyle={props.descriptionPicturesContainerStyle}
                     pictureStyle={props.descriptionPictureStyle}
                 />
