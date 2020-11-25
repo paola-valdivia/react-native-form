@@ -23,11 +23,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingTop: 10,
     },
+    datePickerIOS: {
+        marginLeft: 20,
+        marginRight: 20,
+    },
 });
 
 function DatePicker(props: DatePickerProps) {
     const [iosTempValue, setIosTempValue] = React.useState(props.value);
-    // const iosDateControlValueRef = React.useRef(props.value);
 
     if (Platform.OS !== 'ios') {
         if (!props.isVisible) return null;
@@ -61,6 +64,10 @@ function DatePicker(props: DatePickerProps) {
                     value={iosTempValue}
                     onChange={(event, date?: Date) => date && setIosTempValue(date)}
                     textColor="black"
+                    minimumDate={props.minimumDate}
+                    maximumDate={props.maximumDate}
+                    display="inline"
+                    style={styles.datePickerIOS}
                 />
             </View>
         </Modal>

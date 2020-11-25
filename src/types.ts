@@ -195,8 +195,6 @@ export interface DatePickerProps extends DatePickerStyles {
     isVisible: boolean;
     value: Date;
     onClosePicker: (date?: Date) => void;
-
-    // Android only
     minimumDate?: Date;
     maximumDate?: Date;
 
