@@ -221,8 +221,6 @@ export interface DatePickerFieldProps extends DescriptionProps, DatePickerFieldS
     leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
     dateStringFormat?: string;
-
-    // Android only
     minimumDate?: Date;
     maximumDate?: Date;
 
