@@ -24,7 +24,7 @@ function DatePickerField(props: DatePickerFieldProps) {
         <View>
             <PickerField
                 label={props.label}
-                value={moment(props.value).format(props.dateStringFormat || 'DD/MM/YYYY')}
+                value={props.value ? moment(props.value).format(props.dateStringFormat || 'DD/MM/YYYY') : ''}
                 isValid={props.isValid}
                 openPicker={openPicker}
                 leftIcon={props.leftIcon}

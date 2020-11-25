@@ -193,7 +193,7 @@ export interface DatePickerStyles {
 }
 export interface DatePickerProps extends DatePickerStyles {
     isVisible: boolean;
-    value: Date;
+    value?: Date;
     onClosePicker: (date?: Date) => void;
     minimumDate?: Date;
     maximumDate?: Date;
@@ -215,7 +215,7 @@ export interface DatePickerFieldStyles extends CommonStyles, DatePickerStyles {
 }
 export interface DatePickerFieldProps extends DescriptionProps, DatePickerFieldStyles {
     label: string;
-    value: Date;
+    value?: Date;
     isValid?: Nullable<boolean>;
     onChange: (date?: Date) => void;
     leftIcon?: React.ReactNode;
