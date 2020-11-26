@@ -146,7 +146,7 @@ function MCQField(props: MCQFieldProps) {
                                     props.openFoldableLabelStyle,
                                 ]}
                             >
-                                {props.openFoldableLabel(selectedAnswerQty)}
+                                {props.openFoldableLabel}
                             </Text>
                         )}
                         {openFoldableIcon && renderOpenFoldableIcon(openFoldableIcon)}
@@ -188,7 +188,7 @@ function MCQField(props: MCQFieldProps) {
                                     onPress={toggleFold}
                                 >
                                     <Text style={[styles.answerText, { color: '#fff' }]}>
-                                        {props.closeFoldableLabel(selectedAnswerQty)}
+                                        {props.closeFoldableLabel}
                                     </Text>
                                     {closeFoldableIcon}
                                 </TouchableOpacity>

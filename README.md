@@ -118,29 +118,29 @@ A TextInput with a nice animation on focus/blur
 
 ### `MCQField`
 
-| Property                        | Type                                   | Description                             |
-| ------------------------------- | -------------------------------------- | ----------------------------------------|
-| `label`                         | `string`                               | (Required) Label to display and animate |
-| `possibleAnswers`               | `string[]`                             | (Required) List of possible answers to display |
-| `selectedAnswersIndices`        | `number[]`                             | (Required) List of indices of the selected answers |
-| `onSelectAnswer`                | `(answerIndex: number) => void`        | (Required) Callback fired when user selects an answer |
-| `isValid`                       | `bool \| null`                         | (Optional) If undefined or null, validation will not be rendered. If boolean validation will be rendered either as valid or invalid |
-| `foldable`                      | `boolean`                              | (Optional) Should the MCQField be foldable (useful when there are a lot of possible answers) |
-| `openFoldableLabel`             | `selectedAnswerQty: number) => string` | (Optional) Opening button label for foldable MCQ |
-| `closeFoldableLabel`            | `selectedAnswerQty: number) => string` | (Optional) Closing button label for foldable MCQ |
-| `activeAnswerIcon`              | `React.ReactNode`                      | (Optional) Icon to display next to the answer when it is selected |
-| `inactiveAnswerIcon`            | `React.ReactNode`                      | (Optional) Icon to display next to the answer when it is not selected |
-| `activeOpenFoldableIcon`        | `React.ReactNode`                      | (Optional) Icon to display in the open button for foldable MCQ when it is closed |
-| `inactiveOpenFoldableIcon`      | `React.ReactNode`                      | (Optional) Icon to display in the open button for foldable MCQ when it is opened |
-| `activeCloseFoldableIcon`       | `React.ReactNode`                      | (Optional) Icon to display in the close button for foldable MCQ when it is closed |
-| `inactiveCloseFoldableIcon`     | `React.ReactNode`                      | (Optional) Icon to display in the close button for foldable MCQ when it is opened |
-| `shouldAnimateOpenFoldableIcon` | `boolean`                              | (Optional) Should the openFoldableIcon be animated (90° rotation) on opening |
-| `answerContainerStyle`          | `ViewStyle`                            | (Optional) Answer container style |
-| `answerTextStyle`               | `TextStyle`                            | (Optional) Answer text style |
-| `openFoldableBoxStyle`          | `ViewStyle`                            | (Optional) Open foldable button style |
-| `openFoldableLabelStyle`        | `TextStyle`                            | (Optional) Open foldable button label style |
-| `closeFoldableBoxStyle`         | `ViewStyle`                            | (Optional) Close foldable button style |
-| `closeFoldableLabelStyle`       | `TextStyle`                            | (Optional) Close foldable button label style |
+| Property                        | Type                            | Description                             |
+| ------------------------------- | ------------------------------- | ----------------------------------------|
+| `label`                         | `string`                        | (Required) Label to display and animate |
+| `possibleAnswers`               | `string[]`                      | (Required) List of possible answers to display |
+| `selectedAnswersIndices`        | `number[]`                      | (Required) List of indices of the selected answers |
+| `onSelectAnswer`                | `(answerIndex: number) => void` | (Required) Callback fired when user selects an answer |
+| `isValid`                       | `bool \| null`                  | (Optional) If undefined or null, validation will not be rendered. If boolean validation will be rendered either as valid or invalid |
+| `foldable`                      | `boolean`                       | (Optional) Should the MCQField be foldable (useful when there are a lot of possible answers) |
+| `openFoldableLabel`             | `string`                        | (Optional) Opening button label for foldable MCQ |
+| `closeFoldableLabel`            | `string`                        | (Optional) Closing button label for foldable MCQ |
+| `activeAnswerIcon`              | `React.ReactNode`               | (Optional) Icon to display next to the answer when it is selected |
+| `inactiveAnswerIcon`            | `React.ReactNode`               | (Optional) Icon to display next to the answer when it is not selected |
+| `activeOpenFoldableIcon`        | `React.ReactNode`               | (Optional) Icon to display in the open button for foldable MCQ when it is closed |
+| `inactiveOpenFoldableIcon`      | `React.ReactNode`               | (Optional) Icon to display in the open button for foldable MCQ when it is opened |
+| `activeCloseFoldableIcon`       | `React.ReactNode`               | (Optional) Icon to display in the close button for foldable MCQ when it is closed |
+| `inactiveCloseFoldableIcon`     | `React.ReactNode`               | (Optional) Icon to display in the close button for foldable MCQ when it is opened |
+| `shouldAnimateOpenFoldableIcon` | `boolean`                       | (Optional) Should the openFoldableIcon be animated (90° rotation) on opening |
+| `answerContainerStyle`          | `ViewStyle`                     | (Optional) Answer container style |
+| `answerTextStyle`               | `TextStyle`                     | (Optional) Answer text style |
+| `openFoldableBoxStyle`          | `ViewStyle`                     | (Optional) Open foldable button style |
+| `openFoldableLabelStyle`        | `TextStyle`                     | (Optional) Open foldable button label style |
+| `closeFoldableBoxStyle`         | `ViewStyle`                     | (Optional) Close foldable button style |
+| `closeFoldableLabelStyle`       | `TextStyle`                     | (Optional) Close foldable button label style |
 
 ### `PickerField`
 

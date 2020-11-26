@@ -97,8 +97,8 @@ export interface MCQFieldProps extends DescriptionProps, MCQFieldStyles {
     isValid?: Nullable<boolean>;
     onSelectAnswer: (answerIndex: number) => void;
     foldable?: boolean;
-    openFoldableLabel?: (selectedAnswerQty: number) => string;
-    closeFoldableLabel?: (selectedAnswerQty: number) => string;
+    openFoldableLabel?: string;
+    closeFoldableLabel?: string;
     activeAnswerIcon?: React.ReactNode;
     inactiveAnswerIcon?: React.ReactNode;
     activeOpenFoldableIcon?: React.ReactNode;
