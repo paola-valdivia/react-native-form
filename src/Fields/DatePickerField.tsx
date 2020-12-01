@@ -30,6 +30,9 @@ function DatePickerField(props: DatePickerFieldProps) {
                 leftIcon={props.leftIcon}
                 rightIcon={props.rightIcon}
                 containerStyle={props.containerStyle}
+                labelAndValidationContainerStyle={props.labelAndValidationContainerStyle}
+                labelStyle={props.labelStyle}
+                validationDotStyle={props.validationDotStyle}
                 inputContainerStyle={props.inputContainerStyle}
                 inputStyle={props.inputStyle}
                 descriptionText={props.descriptionText}

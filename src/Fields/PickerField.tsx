@@ -23,6 +23,9 @@ function PickerField(props: PickerFieldProps) {
             leftIcon={props.leftIcon}
             rightIcon={props.rightIcon}
             containerStyle={props.containerStyle}
+            labelAndValidationContainerStyle={props.labelAndValidationContainerStyle}
+            labelStyle={props.labelStyle}
+            validationDotStyle={props.validationDotStyle}
             inputContainerStyle={props.inputContainerStyle}
             descriptionText={props.descriptionText}
             descriptionPictures={props.descriptionPictures}

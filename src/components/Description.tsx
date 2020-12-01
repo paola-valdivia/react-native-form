@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import { DescriptionProps } from '../types';
-import styles from '../SharedStyles';
 
 import DescriptionPictures from './DescriptionPictures';
 
@@ -19,7 +18,7 @@ export const descriptionProps: (keyof DescriptionProps)[] = [
 
 function Description(props: DescriptionProps) {
     return (
-        <View style={[styles.container, props.descriptionContainerStyle]}>
+        <View style={props.descriptionContainerStyle}>
             {props.descriptionText && <Text style={props.descriptionTextStyle}>{props.descriptionText}</Text>}
             {props.descriptionPictures && (
                 <DescriptionPictures
