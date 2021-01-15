@@ -69,10 +69,12 @@ export interface TextFieldAnimationProps extends DescriptionProps, TextFieldAnim
 /* MCQField */
 export interface MCQAnswerProps {
     text: string;
-    onPress: () => void;
-    icon?: React.ReactNode;
-    containerStyle?: StyleProp<ViewStyle>;
-    textStyle?: StyleProp<TextStyle>;
+    onPress: (index: number) => void;
+    isSelected: boolean;
+    index: number;
+    icon?: (isSelected: boolean) => React.ReactNode;
+    containerStyle?: (isSelected: boolean, index: number) => StyleProp<ViewStyle>;
+    textStyle?: (isSelected: boolean) => StyleProp<TextStyle>;
 }
 export interface MCQFieldStyles extends CommonStyles {
     answerContainerStyle?: StyleProp<ViewStyle>;

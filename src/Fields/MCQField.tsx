@@ -11,11 +11,13 @@ import ValidationDot from '../components/ValidationDot';
 
 /* Component used for individual answers */
 const MCQAnswer = React.memo((props: MCQAnswerProps) => {
+    const { text, onPress, isSelected, index, icon, containerStyle, textStyle } = props;
+
     return (
-        <TouchableWithoutFeedback onPress={props.onPress}>
-            <View style={[styles.answerContainer, props.containerStyle]}>
-                <Text style={[styles.answerText, props.textStyle]}>{props.text}</Text>
-                {props.icon}
+        <TouchableWithoutFeedback onPress={() => onPress(index)}>
+            <View style={[styles.answerContainer, containerStyle && containerStyle(isSelected, index)]}>
+                <Text style={[styles.answerText, textStyle && textStyle(isSelected)]}>{text}</Text>
+                {icon && icon(isSelected)}
             </View>
         </TouchableWithoutFeedback>
     );
@@ -41,10 +43,17 @@ function MCQField(props: MCQFieldProps) {
 
     const toggleFold = () => setIsFolded((prevIsFolded) => !prevIsFolded);
 
-    const activeColor = props.colors?.active || baseColors.main;
-    const inactiveColor = props.colors?.inactive || baseColors.inactive;
-    const activeBackgroundColor = props.colors?.activeBackground || baseColors.background;
-    const inactiveBackgroundColor = props.colors?.inactiveBackground || '#fff';
+    const activeColor = React.useMemo(() => (props.colors && props.colors.active) || baseColors.main, [props.colors]);
+    const inactiveColor = React.useMemo(() => (props.colors && props.colors.inactive) || baseColors.inactive, [
+        props.colors,
+    ]);
+    const activeBackgroundColor = React.useMemo(
+        () => (props.colors && props.colors.activeBackground) || baseColors.background,
+        [props.colors]
+    );
+    const inactiveBackgroundColor = React.useMemo(() => (props.colors && props.colors.inactiveBackground) || '#fff', [
+        props.colors,
+    ]);
 
     let openFoldableIcon = props.activeOpenFoldableIcon;
     if (props.inactiveOpenFoldableIcon && selectedAnswerQty === 0) {
@@ -56,7 +65,37 @@ function MCQField(props: MCQFieldProps) {
         closeFoldableIcon = props.inactiveCloseFoldableIcon;
     }
 
-    const onPressAnswer = React.useCallback((index: number) => () => onSelectAnswer(index), [onSelectAnswer]);
+    const onPressAnswer = React.useCallback((index: number) => onSelectAnswer(index), [onSelectAnswer]);
+
+    const answerIcon = React.useCallback(
+        (isSelected: boolean) => {
+            return isSelected ? props.activeAnswerIcon : props.inactiveAnswerIcon;
+        },
+        [props.activeAnswerIcon, props.inactiveAnswerIcon]
+    );
+    const answerContainerStyle = React.useCallback(
+        (isSelected: boolean, index: number) => {
+            const color = isSelected ? activeColor : inactiveColor;
+            const backgroundColor = isSelected ? activeBackgroundColor : inactiveBackgroundColor;
+
+            return [
+                {
+                    borderColor: color,
+                    backgroundColor,
+                    marginTop: index > 0 ? 10 : 0,
+                },
+                props.answerContainerStyle,
+            ];
+        },
+        [activeColor, inactiveColor, activeBackgroundColor, inactiveBackgroundColor, props.answerContainerStyle]
+    );
+    const answerTextStyle = React.useCallback(
+        (isSelected: boolean) => {
+            const color = isSelected ? activeColor : inactiveColor;
+            return [{ color }, props.answerTextStyle];
+        },
+        [activeColor, inactiveColor, props.answerTextStyle]
+    );
 
     const renderOpenFoldableIcon = (icon: React.ReactNode): React.ReactNode => {
         if (!icon) return null;
@@ -101,25 +140,16 @@ function MCQField(props: MCQFieldProps) {
 
             {!props.foldable ? (
                 props.possibleAnswers.map((possibleAnswer: string, index: number) => {
-                    const isSelected = props.selectedAnswersIndices.includes(index);
-                    const icon = isSelected ? props.activeAnswerIcon : props.inactiveAnswerIcon;
-                    const color = isSelected ? activeColor : inactiveColor;
-                    const backgroundColor = isSelected ? activeBackgroundColor : inactiveBackgroundColor;
                     return (
                         <MCQAnswer
                             key={`answer_${index}`}
                             text={possibleAnswer}
-                            onPress={onPressAnswer(index)}
-                            icon={icon}
-                            containerStyle={[
-                                {
-                                    borderColor: color,
-                                    backgroundColor,
-                                    marginTop: index > 0 ? 10 : 0,
-                                },
-                                props.answerContainerStyle,
-                            ]}
-                            textStyle={[{ color }, props.answerTextStyle]}
+                            onPress={onPressAnswer}
+                            isSelected={props.selectedAnswersIndices.includes(index)}
+                            index={index}
+                            icon={answerIcon}
+                            containerStyle={answerContainerStyle}
+                            textStyle={answerTextStyle}
                         />
                     );
                 })
@@ -160,25 +190,16 @@ function MCQField(props: MCQFieldProps) {
                     {!isFolded && (
                         <>
                             {props.possibleAnswers.map((possibleAnswer, index) => {
-                                const isSelected = props.selectedAnswersIndices.includes(index);
-                                const icon = isSelected ? props.activeAnswerIcon : props.inactiveAnswerIcon;
-                                const color = isSelected ? activeColor : inactiveColor;
-                                const backgroundColor = isSelected ? activeBackgroundColor : inactiveBackgroundColor;
                                 return (
                                     <MCQAnswer
                                         key={`answer_${index}`}
                                         text={possibleAnswer}
-                                        onPress={onPressAnswer(index)}
-                                        icon={icon}
-                                        containerStyle={[
-                                            {
-                                                borderColor: color,
-                                                backgroundColor,
-                                                marginTop: index > 0 ? 10 : 0,
-                                            },
-                                            props.answerContainerStyle,
-                                        ]}
-                                        textStyle={[{ color }, props.answerTextStyle]}
+                                        onPress={onPressAnswer}
+                                        isSelected={props.selectedAnswersIndices.includes(index)}
+                                        index={index}
+                                        icon={answerIcon}
+                                        containerStyle={answerContainerStyle}
+                                        textStyle={answerTextStyle}
                                     />
                                 );
                             })}
