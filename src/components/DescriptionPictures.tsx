@@ -1,7 +1,19 @@
 import React from 'react';
 import { View, Image, TouchableHighlight } from 'react-native';
 
+import { makeCancelablePromise } from '../utils';
 import { DescriptionPicturesProps } from '../types';
+
+// Transform react-native Image.getSize to be a Promise
+const getImageSize = (uri: string): Promise<{ width: number; height: number }> => {
+    return new Promise<{ width: number; height: number }>((resolve, reject) => {
+        Image.getSize(
+            uri,
+            (width, height) => resolve({ width, height }),
+            (error) => reject(error)
+        );
+    });
+};
 
 interface PictureSizes {
     [index: number]: { width: number; height: number };
@@ -19,27 +31,30 @@ function DescriptionPictures(props: DescriptionPicturesProps) {
 
     // Initialize pictureSizes using the given dimensions or calculating them otherwise
     React.useEffect(() => {
+        let cancelablePromise: { promise: Promise<{ width: number; height: number }>; cancel: () => void };
         const newPictureSizes: PictureSizes = {};
         pictures.forEach((formUrl, index) => {
             if (formUrl.dimensions) {
                 newPictureSizes[index] = formUrl.dimensions;
             } else {
-                Image.getSize(
-                    formUrl.src,
-                    (width, height) => {
+                cancelablePromise = makeCancelablePromise<{ width: number; height: number }>(getImageSize(formUrl.src));
+
+                cancelablePromise.promise
+                    .then(({ width, height }) => {
                         setPictureSizes((prevPictureSizes) => ({
                             ...prevPictureSizes,
                             [index]: { height, width },
                         }));
-                    },
-                    (error) => {
-                        console.log(error);
-                    }
-                );
+                    })
+                    .catch(console.log);
             }
         });
         // Reset pictureSizes state to newPictureSizes which will then be updated when the callbacks are called
         setPictureSizes(newPictureSizes);
+
+        return () => {
+            cancelablePromise && cancelablePromise.cancel();
+        };
     }, [pictures]);
 
     const pictureUris = React.useMemo(() => pictures.map((formUrl) => formUrl.src), [pictures]);
