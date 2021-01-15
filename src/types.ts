@@ -60,8 +60,8 @@ export interface TextFieldAnimationProps extends DescriptionProps, TextFieldAnim
     isExpanded: boolean;
     onPress?: () => void;
     onEndAnimation?: () => void;
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
+    leftIcon?: (isExpanded: boolean) => React.ReactNode;
+    rightIcon?: (isExpanded: boolean) => React.ReactNode;
     minFontSize?: number;
     maxFontSize?: number;
 }
@@ -162,8 +162,8 @@ export interface PickerFieldProps extends DescriptionProps, PickerFieldStyles {
     value: string;
     isValid?: Nullable<boolean>;
     openPicker: () => void;
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
+    leftIcon?: (isExpanded: boolean) => React.ReactNode;
+    rightIcon?: (isExpanded: boolean) => React.ReactNode;
 }
 
 /* SingleLineTextField */
@@ -182,8 +182,10 @@ export interface SingleLineTextFieldProps extends DescriptionProps, SingleLineTe
     onChangeText?: (text: string) => void;
     onFocus?: () => void;
     onBlur?: () => void;
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
+    leftIcon?: (isExpanded: boolean) => React.ReactNode;
+    rightIcon?: (isExpanded: boolean) => React.ReactNode;
+    minFontSize?: number;
+    maxFontSize?: number;
     textInputProps?: TextInputProps;
 }
 
@@ -220,8 +222,8 @@ export interface DatePickerFieldProps extends DescriptionProps, DatePickerFieldS
     value?: Date;
     isValid?: Nullable<boolean>;
     onChange: (date?: Date) => void;
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
+    leftIcon?: (isExpanded: boolean) => React.ReactNode;
+    rightIcon?: (isExpanded: boolean) => React.ReactNode;
     dateStringFormat?: string;
     minimumDate?: Date;
     maximumDate?: Date;

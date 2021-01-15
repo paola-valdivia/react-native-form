@@ -46,7 +46,7 @@ function TextFieldAnimation(props: TextFieldAnimationProps) {
                 <Description {...R.pick(descriptionProps, props)} />
 
                 <View style={[styles.inputContainer, props.inputContainerStyle]}>
-                    {props.leftIcon}
+                    {props.leftIcon && props.leftIcon(isExpanded)}
 
                     <View style={styles.innerContainer}>
                         <Animated.View
@@ -91,7 +91,7 @@ function TextFieldAnimation(props: TextFieldAnimationProps) {
                         )}
                     </View>
 
-                    {props.rightIcon}
+                    {props.rightIcon && props.rightIcon(isExpanded)}
 
                     <ValidationDot
                         isValid={isValid}
