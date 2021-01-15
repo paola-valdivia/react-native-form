@@ -14,8 +14,8 @@ function DatePickerField(props: DatePickerFieldProps) {
     const openPicker = React.useCallback(() => setShowPicker(true), []);
     const onClosePicker = React.useCallback(
         (date?: Date) => {
-            onChange(date);
             setShowPicker(false);
+            onChange(date);
         },
         [onChange]
     );
