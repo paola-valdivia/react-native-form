@@ -11,13 +11,45 @@ Optimized field components with nice design for react-native forms
 
 Install the library using Yarn:
 ```bash
-yarn add react-native-form-fields
+yarn add @mobeye/react-native-form-fields
 ```
 
 ## General Usage
 
+See example app (`example/App.tsx`) for more examples using TypeScript
+
+You can use most Fields based on the example below, they work in the same way as a basic `TextInput`
+
 ```javascript
 import React from 'react';
+import SingleLineTextField from '@mobeye/react-native-form-fields';
+
+const App = () => {
+    const [text, setText] = React.useState('');
+    
+    const containerStyle = {
+        width: '90%',
+        marginTop: 10,
+        borderRadius: 5,
+        padding: 10,
+        backgroundColor: '#fff',
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 14,
+        elevation: 5,
+    }
+    
+    // Make sure to use React callbacks and/or memoized values to prevent unnecessary renders !
+    return (
+        <SingleLineTextField
+            label="Click on me !"
+            value={text}
+            onChangeText={setText}
+            containerStyle={containerStyle}
+        />
+    );
+}
 ```
 
 ## Field common props
