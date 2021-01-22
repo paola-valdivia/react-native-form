@@ -2,11 +2,20 @@ import React from 'react';
 import { View, Image, TouchableHighlight } from 'react-native';
 
 import { makeCancelablePromise } from '../utils';
-import { DescriptionPicturesProps } from '../types';
+import { CancelablePromise, DescriptionPicturesProps } from '../types';
+
+interface PictureSize {
+    width: number;
+    height: number;
+}
+
+interface PictureSizes {
+    [index: number]: PictureSize;
+}
 
 // Transform react-native Image.getSize to be a Promise
-const getImageSize = (uri: string): Promise<{ width: number; height: number }> => {
-    return new Promise<{ width: number; height: number }>((resolve, reject) => {
+const getImageSize = (uri: string): Promise<PictureSize> => {
+    return new Promise<PictureSize>((resolve, reject) => {
         Image.getSize(
             uri,
             (width, height) => resolve({ width, height }),
@@ -14,10 +23,6 @@ const getImageSize = (uri: string): Promise<{ width: number; height: number }> =
         );
     });
 };
-
-interface PictureSizes {
-    [index: number]: { width: number; height: number };
-}
 
 function DescriptionPictures(props: DescriptionPicturesProps) {
     const { pictures, onPressPicture, ImageViewer } = props;
@@ -31,13 +36,14 @@ function DescriptionPictures(props: DescriptionPicturesProps) {
 
     // Initialize pictureSizes using the given dimensions or calculating them otherwise
     React.useEffect(() => {
-        let cancelablePromise: { promise: Promise<{ width: number; height: number }>; cancel: () => void };
+        const cancelablePromises: CancelablePromise<PictureSize>[] = [];
         const newPictureSizes: PictureSizes = {};
         pictures.forEach((formUrl, index) => {
             if (formUrl.dimensions) {
                 newPictureSizes[index] = formUrl.dimensions;
             } else {
-                cancelablePromise = makeCancelablePromise<{ width: number; height: number }>(getImageSize(formUrl.src));
+                const cancelablePromise = makeCancelablePromise<PictureSize>(getImageSize(formUrl.src));
+                cancelablePromises.push(cancelablePromise);
 
                 cancelablePromise.promise
                     .then(({ width, height }) => {
@@ -53,7 +59,7 @@ function DescriptionPictures(props: DescriptionPicturesProps) {
         setPictureSizes(newPictureSizes);
 
         return () => {
-            cancelablePromise && cancelablePromise.cancel();
+            cancelablePromises.forEach((promise) => promise.cancel);
         };
     }, [pictures]);
 
