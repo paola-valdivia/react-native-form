@@ -3,6 +3,11 @@ import React, { FC } from 'react';
 
 export type Nullable<T> = T | null;
 
+export interface CancelablePromise<T> {
+    promise: Promise<T>;
+    cancel: () => void;
+}
+
 interface FormUrl {
     readonly src: string;
     readonly name?: string;

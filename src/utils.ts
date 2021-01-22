@@ -1,4 +1,6 @@
-export function makeCancelablePromise<T = any>(promise: Promise<T>): { promise: Promise<T>; cancel: () => void } {
+import { CancelablePromise } from './types';
+
+export function makeCancelablePromise<T = any>(promise: Promise<T>): CancelablePromise<T> {
     let hasCanceled_ = false;
 
     const wrappedPromise = new Promise<T>((resolve, reject) => {
