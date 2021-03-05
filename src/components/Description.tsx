@@ -19,7 +19,7 @@ export const descriptionProps: (keyof DescriptionProps)[] = [
 function Description(props: DescriptionProps) {
     return (
         <View style={props.descriptionContainerStyle}>
-            {props.descriptionText && <Text style={props.descriptionTextStyle}>{props.descriptionText}</Text>}
+            {!!props.descriptionText && <Text style={props.descriptionTextStyle}>{props.descriptionText}</Text>}
             {props.descriptionPictures && (
                 <DescriptionPictures
                     pictures={props.descriptionPictures}
