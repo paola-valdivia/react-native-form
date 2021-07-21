@@ -7,7 +7,7 @@ import sharedStyles from '../SharedStyles';
 import TextFieldAnimation from '../components/TextFieldAnimation';
 
 function PickerField(props: PickerFieldProps) {
-    const { value, isValid, openPicker } = props;
+    const { value, isValid, openPicker, disabled } = props;
 
     const onPress = React.useCallback(() => {
         Keyboard.dismiss();
@@ -33,6 +33,7 @@ function PickerField(props: PickerFieldProps) {
             descriptionTextStyle={props.descriptionTextStyle}
             descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
             descriptionPictureStyle={props.descriptionPictureStyle}
+            disabled={disabled}
         >
             <Text style={[sharedStyles.inputText, props.inputStyle]}>{value}</Text>
         </TextFieldAnimation>
