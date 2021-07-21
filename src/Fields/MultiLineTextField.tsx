@@ -35,7 +35,14 @@ function MultiLineTextField(props: MultiLineTextFieldProps) {
 
     return (
         <TouchableWithoutFeedback onPress={onPress} disabled={disabled}>
-            <View style={[styles.container, { shadowOpacity: isFocused ? 0.35 : 0.1 }, disabled && { shadowColor: '#fff' }, props.containerStyle]}>
+            <View
+                style={[
+                    styles.container,
+                    { shadowOpacity: isFocused ? 0.35 : 0.1 },
+                    disabled && { shadowColor: '#fff' },
+                    props.containerStyle,
+                ]}
+            >
                 <Description {...R.pick(descriptionProps, props)} />
 
                 <View style={[styles.labelAndValidationContainer, props.labelAndValidationContainerStyle]}>

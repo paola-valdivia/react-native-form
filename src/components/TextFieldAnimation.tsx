@@ -42,7 +42,7 @@ function TextFieldAnimation(props: TextFieldAnimationProps) {
 
     return (
         <TouchableWithoutFeedback onPress={onPress} disabled={!onPress || disabled}>
-            <View style={[sharedStyles.container, disabled && {shadowColor: '#fff'}, props.containerStyle]}>
+            <View style={[sharedStyles.container, disabled && { shadowColor: '#fff' }, props.containerStyle]}>
                 <Description {...R.pick(descriptionProps, props)} />
 
                 <View style={[styles.inputContainer, props.inputContainerStyle]}>
