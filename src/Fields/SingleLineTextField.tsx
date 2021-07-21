@@ -7,7 +7,7 @@ import sharedStyles from '../SharedStyles';
 import TextFieldAnimation from '../components/TextFieldAnimation';
 
 const SingleLineTextField = React.forwardRef((props: SingleLineTextFieldProps, ref) => {
-    const { value, isValid, onChangeText, onFocus, onBlur } = props;
+    const { value, isValid, onChangeText, onFocus, onBlur, disabled } = props;
 
     const inputRef = React.useRef<TextInput>(null);
     const prevFocusRef = React.useRef(false);
@@ -60,6 +60,7 @@ const SingleLineTextField = React.forwardRef((props: SingleLineTextFieldProps, r
             descriptionTextStyle={props.descriptionTextStyle}
             descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
             descriptionPictureStyle={props.descriptionPictureStyle}
+            disabled={disabled}
         >
             <TextInput
                 ref={inputRef}

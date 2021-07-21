@@ -11,10 +11,10 @@ import ValidationDot from '../components/ValidationDot';
 
 /* Component used for individual answers */
 const MCQAnswer = React.memo((props: MCQAnswerProps) => {
-    const { text, onPress, isSelected, index, icon, containerStyle, textStyle } = props;
+    const { text, onPress, isSelected, index, icon, containerStyle, textStyle, disabled } = props;
 
     return (
-        <TouchableWithoutFeedback onPress={() => onPress(index)}>
+        <TouchableWithoutFeedback onPress={() => onPress(index)} disabled={disabled}>
             <View style={[styles.answerContainer, containerStyle && containerStyle(isSelected, index)]}>
                 <Text style={[styles.answerText, textStyle && textStyle(isSelected)]}>{text}</Text>
                 {icon && icon(isSelected)}
@@ -24,7 +24,7 @@ const MCQAnswer = React.memo((props: MCQAnswerProps) => {
 });
 
 function MCQField(props: MCQFieldProps) {
-    const { onSelectAnswer } = props;
+    const { onSelectAnswer, disabled } = props;
 
     const selectedAnswerQty = props.selectedAnswersIndices.length;
 
@@ -124,7 +124,7 @@ function MCQField(props: MCQFieldProps) {
     };
 
     return (
-        <View style={[styles.container, props.containerStyle]}>
+        <View style={[styles.container, disabled && { shadowColor: '#fff' }, props.containerStyle]}>
             <Description {...R.pick(descriptionProps, props)} />
 
             <View style={[styles.labelAndValidationContainer, props.labelAndValidationContainerStyle]}>
@@ -150,6 +150,7 @@ function MCQField(props: MCQFieldProps) {
                             icon={answerIcon}
                             containerStyle={answerContainerStyle}
                             textStyle={answerTextStyle}
+                            disabled={disabled}
                         />
                     );
                 })
@@ -167,6 +168,7 @@ function MCQField(props: MCQFieldProps) {
                             props.openFoldableBoxStyle,
                         ]}
                         onPress={toggleFold}
+                        disabled={disabled}
                     >
                         {props.openFoldableLabel && (
                             <Text
@@ -200,6 +202,7 @@ function MCQField(props: MCQFieldProps) {
                                         icon={answerIcon}
                                         containerStyle={answerContainerStyle}
                                         textStyle={answerTextStyle}
+                                        disabled={disabled}
                                     />
                                 );
                             })}

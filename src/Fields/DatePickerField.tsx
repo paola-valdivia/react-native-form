@@ -7,7 +7,7 @@ import DatePicker from '../DatePicker/DatePicker';
 import { DatePickerFieldProps } from '../types';
 
 function DatePickerField(props: DatePickerFieldProps) {
-    const { onChange } = props;
+    const { onChange, disabled } = props;
 
     const [showPicker, setShowPicker] = React.useState(false);
 
@@ -41,6 +41,7 @@ function DatePickerField(props: DatePickerFieldProps) {
                 descriptionTextStyle={props.descriptionTextStyle}
                 descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
                 descriptionPictureStyle={props.descriptionPictureStyle}
+                disabled={disabled}
             />
             <DatePicker
                 isVisible={showPicker}

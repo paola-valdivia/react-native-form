@@ -10,7 +10,7 @@ import Description, { descriptionProps } from '../components/Description';
 import ValidationDot from '../components/ValidationDot';
 
 function MultiLineTextField(props: MultiLineTextFieldProps) {
-    const { label, value, isValid, onChangeText, placeholder, onFocus, onBlur, textInputProps } = props;
+    const { label, value, isValid, onChangeText, placeholder, onFocus, onBlur, textInputProps, disabled } = props;
 
     const inputRef = React.useRef<TextInput>(null);
     const prevFocusRef = React.useRef<boolean>(false);
@@ -34,8 +34,8 @@ function MultiLineTextField(props: MultiLineTextFieldProps) {
     }, [isFocused]);
 
     return (
-        <TouchableWithoutFeedback onPress={onPress}>
-            <View style={[styles.container, { shadowOpacity: isFocused ? 0.35 : 0.1 }, props.containerStyle]}>
+        <TouchableWithoutFeedback onPress={onPress} disabled={disabled}>
+            <View style={[styles.container, { shadowOpacity: isFocused ? 0.35 : 0.1 }, disabled && { shadowColor: '#fff' }, props.containerStyle]}>
                 <Description {...R.pick(descriptionProps, props)} />
 
                 <View style={[styles.labelAndValidationContainer, props.labelAndValidationContainerStyle]}>
@@ -55,6 +55,7 @@ function MultiLineTextField(props: MultiLineTextFieldProps) {
                     multiline={true}
                     placeholderTextColor={props.colors?.placeholder || baseColors.placeholder}
                     style={[styles.inputText, props.inputStyle]}
+                    editable={!disabled}
                     {...textInputProps}
                 />
             </View>

@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 });
 
 function TextFieldAnimation(props: TextFieldAnimationProps) {
-    const { children, label, isValid, isExpanded, onPress, onEndAnimation } = props;
+    const { children, label, isValid, isExpanded, onPress, onEndAnimation, disabled } = props;
 
     const animationValue = React.useRef(new Animated.Value(isExpanded ? 1 : 0));
 
@@ -41,8 +41,8 @@ function TextFieldAnimation(props: TextFieldAnimationProps) {
     const maxFontSize = props.maxFontSize || 13;
 
     return (
-        <TouchableWithoutFeedback onPress={onPress} disabled={!onPress}>
-            <View style={[sharedStyles.container, props.containerStyle]}>
+        <TouchableWithoutFeedback onPress={onPress} disabled={!onPress || disabled}>
+            <View style={[sharedStyles.container, disabled && {shadowColor: '#fff'}, props.containerStyle]}>
                 <Description {...R.pick(descriptionProps, props)} />
 
                 <View style={[styles.inputContainer, props.inputContainerStyle]}>

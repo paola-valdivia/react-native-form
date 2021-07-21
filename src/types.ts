@@ -69,6 +69,7 @@ export interface TextFieldAnimationProps extends DescriptionProps, TextFieldAnim
     rightIcon?: (isExpanded: boolean) => React.ReactNode;
     minFontSize?: number;
     maxFontSize?: number;
+    disabled?: boolean;
 }
 
 /* MCQField */
@@ -80,6 +81,7 @@ export interface MCQAnswerProps {
     icon?: (isSelected: boolean) => React.ReactNode;
     containerStyle?: (isSelected: boolean, index: number) => StyleProp<ViewStyle>;
     textStyle?: (isSelected: boolean) => StyleProp<TextStyle>;
+    disabled?: boolean;
 }
 export interface MCQFieldStyles extends CommonStyles {
     answerContainerStyle?: StyleProp<ViewStyle>;
@@ -113,6 +115,7 @@ export interface MCQFieldProps extends DescriptionProps, MCQFieldStyles {
     activeCloseFoldableIcon?: React.ReactNode;
     inactiveCloseFoldableIcon?: React.ReactNode;
     shouldAnimateOpenFoldableIcon?: boolean;
+    disabled?: boolean;
 }
 
 /* MultiLineTextField */
@@ -132,6 +135,7 @@ export interface MultiLineTextFieldProps extends DescriptionProps, MultiLineText
     placeholder?: string;
     onFocus?: () => void;
     onBlur?: () => void;
+    disabled?: boolean;
     textInputProps?: TextInputProps;
 }
 
@@ -166,6 +170,7 @@ export interface PickerFieldProps extends DescriptionProps, PickerFieldStyles {
     label: string;
     value: string;
     isValid?: Nullable<boolean>;
+    disabled?: boolean;
     openPicker: () => void;
     leftIcon?: (isExpanded: boolean) => React.ReactNode;
     rightIcon?: (isExpanded: boolean) => React.ReactNode;
@@ -191,6 +196,7 @@ export interface SingleLineTextFieldProps extends DescriptionProps, SingleLineTe
     rightIcon?: (isExpanded: boolean) => React.ReactNode;
     minFontSize?: number;
     maxFontSize?: number;
+    disabled?: boolean;
     textInputProps?: TextInputProps;
 }
 
@@ -232,6 +238,7 @@ export interface DatePickerFieldProps extends DescriptionProps, DatePickerFieldS
     dateStringFormat?: string;
     minimumDate?: Date;
     maximumDate?: Date;
+    disabled?: boolean;
 
     // iOS only
     iosClearButtonText?: string;
