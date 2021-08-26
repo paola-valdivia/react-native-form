@@ -11,7 +11,7 @@ import ValidationDot from './ValidationDot';
 const styles = StyleSheet.create({
     inputContainer: {
         flexDirection: 'row',
-        height: 30,
+        height: 40,
     },
     innerContainer: {
         flex: 1,
@@ -61,7 +61,7 @@ function TextFieldAnimation(props: TextFieldAnimationProps) {
                             ]}
                         >
                             <Animated.Text
-                                numberOfLines={1}
+                                numberOfLines={isExpanded ? 1 : 2}
                                 style={[
                                     sharedStyles.labelText,
                                     props.labelStyle,
