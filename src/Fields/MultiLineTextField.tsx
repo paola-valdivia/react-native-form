@@ -46,7 +46,7 @@ function MultiLineTextField(props: MultiLineTextFieldProps) {
                 <Description {...R.pick(descriptionProps, props)} />
 
                 <View style={[styles.labelAndValidationContainer, props.labelAndValidationContainerStyle]}>
-                    <Text numberOfLines={1} style={[styles.labelText, props.labelStyle]}>
+                    <Text numberOfLines={3} ellipsizeMode={'tail'} style={[styles.labelText, props.labelStyle]}>
                         {label}
                     </Text>
                     <ValidationDot isValid={isValid} style={props.validationDotStyle} colors={props.colors} />

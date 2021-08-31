@@ -128,7 +128,10 @@ function MCQField(props: MCQFieldProps) {
             <Description {...R.pick(descriptionProps, props)} />
 
             <View style={[styles.labelAndValidationContainer, props.labelAndValidationContainerStyle]}>
-                {props.label && <Text style={[styles.labelText, props.labelStyle]}>{props.label}</Text>}
+                {props.label && <Text
+                    numberOfLines={3}
+                    ellipsizeMode={'tail'}
+                    style={[styles.labelText, props.labelStyle]}>{props.label}</Text>}
                 {!props.foldable && (
                     <ValidationDot isValid={props.isValid} style={props.validationDotStyle} colors={props.colors} />
                 )}
