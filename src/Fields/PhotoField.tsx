@@ -43,7 +43,7 @@ function PhotoField(props: PhotoFieldProps) {
                     props.labelAndValidationContainerStyle,
                 ]}
             >
-                <Text numberOfLines={1} style={[sharedStyles.labelText, props.labelStyle]}>
+                <Text style={[sharedStyles.labelText, props.labelStyle]}>
                     {props.label}
                 </Text>
                 <ValidationDot isValid={props.isValid} style={props.validationDotStyle} colors={props.colors} />
