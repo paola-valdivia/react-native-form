@@ -96,7 +96,10 @@ function DescriptionPictures(props: DescriptionPicturesProps) {
                         >
                             <Image
                                 source={{ uri }}
-                                style={[{ marginBottom: 15, height, width, maxHeight: 600 }, props.pictureStyle]}
+                                style={[
+                                    { marginBottom: 15, height, width, maxHeight: 600, resizeMode: 'contain' },
+                                    props.pictureStyle,
+                                ]}
                             />
                         </TouchableHighlight>
                     );
