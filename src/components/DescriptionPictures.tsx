@@ -94,7 +94,10 @@ function DescriptionPictures(props: DescriptionPicturesProps) {
                             }}
                             disabled={!ImageViewer}
                         >
-                            <Image source={{ uri }} style={[{ marginBottom: 15, height, width }, props.pictureStyle]} />
+                            <Image
+                                source={{ uri }}
+                                style={[{ marginBottom: 15, height, width, maxHeight: 600 }, props.pictureStyle]}
+                            />
                         </TouchableHighlight>
                     );
                 })}
