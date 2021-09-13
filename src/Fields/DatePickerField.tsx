@@ -39,6 +39,7 @@ function DatePickerField(props: DatePickerFieldProps) {
                 descriptionPictures={props.descriptionPictures}
                 onPressDescriptionPicture={props.onPressDescriptionPicture}
                 descriptionTextStyle={props.descriptionTextStyle}
+                descriptionImageViewer={props.descriptionImageViewer}
                 descriptionPicturesContainerStyle={props.descriptionPicturesContainerStyle}
                 descriptionPictureStyle={props.descriptionPictureStyle}
                 disabled={disabled}

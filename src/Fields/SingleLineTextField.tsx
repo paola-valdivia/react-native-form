@@ -55,6 +55,7 @@ const SingleLineTextField = React.forwardRef((props: SingleLineTextFieldProps, r
             validationDotStyle={props.validationDotStyle}
             inputContainerStyle={props.inputContainerStyle}
             descriptionText={props.descriptionText}
+            descriptionImageViewer={props.descriptionImageViewer}
             descriptionPictures={props.descriptionPictures}
             onPressDescriptionPicture={props.onPressDescriptionPicture}
             descriptionTextStyle={props.descriptionTextStyle}
