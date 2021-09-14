@@ -97,7 +97,7 @@ function DescriptionPictures(props: DescriptionPicturesProps) {
                             <Image
                                 source={{ uri }}
                                 style={[
-                                    { marginBottom: 15, height, width, maxHeight: 600, resizeMode: 'contain' },
+                                    { marginBottom: 15, height, width, maxHeight: 300, resizeMode: 'contain' },
                                     props.pictureStyle,
                                 ]}
                             />
