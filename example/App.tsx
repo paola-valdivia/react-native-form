@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import { StyleSheet, ScrollView, SafeAreaView, Text } from 'react-native';
-import { MCQField, MultiLineTextField, SingleLineTextField } from 'react-native-form-fields';
+import { MCQField, MultiLineTextField, SingleLineTextField, DatePickerField } from 'react-native-form-fields';
 
 const styles = StyleSheet.create({
     container: {
@@ -38,6 +38,7 @@ interface State {
     singleLineTextField3Focus: boolean;
     multiLineTextField1: string;
     multiLineTextField2: string;
+    datePickerField: Date | undefined;
     mcqFieldSelectedAnswers: number[];
     mcqFieldSelectedAnswers2: number[];
 }
@@ -63,6 +64,7 @@ const App = (): React.ReactElement => {
         singleLineTextField3Focus: false,
         multiLineTextField1: '',
         multiLineTextField2: '',
+        datePickerField: undefined,
         mcqFieldSelectedAnswers: [],
         mcqFieldSelectedAnswers2: [],
     };
@@ -84,6 +86,10 @@ const App = (): React.ReactElement => {
     );
     const onChangeTextMLTF1 = React.useCallback((text: string) => dispatch({ multiLineTextField1: text }), []);
     const onChangeTextMLTF2 = React.useCallback((text: string) => dispatch({ multiLineTextField2: text }), []);
+    const onChangeDatePickerField = React.useCallback(
+        (date?: Date | undefined) => dispatch({ datePickerField: date }),
+        []
+    );
 
     const onSelectAnswerMCQF = React.useCallback(
         (index: number) => {
@@ -186,6 +192,15 @@ const App = (): React.ReactElement => {
                     onChangeText={onChangeTextMLTF2}
                     containerStyle={styles.fieldContainer}
                     descriptionPicturesContainerStyle={{ marginTop: 10 }}
+                />
+
+                {/* DatePickerField */}
+                <DatePickerField
+                    label="I am a DatePickerField"
+                    value={state.datePickerField}
+                    onChange={onChangeDatePickerField}
+                    descriptionText={'This showcases an example of a field with a date picker. '}
+                    containerStyle={styles.fieldContainer}
                 />
 
                 {/* MCQField */}
