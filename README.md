@@ -2,6 +2,12 @@
 
 Optimized field components with nice design for react-native forms
 
+<p style="text-align: center;">
+  <a href="https://www.npmjs.com/package/@mobeye/react-native-form-fields"><img src="https://img.shields.io/npm/dm/@mobeye/react-native-form-fields.svg?style=flat-square" alt="NPM downloads"></a>
+  <a href="https://www.npmjs.com/package/@mobeye/react-native-form-fields"><img src="https://img.shields.io/npm/v/@mobeye/react-native-form-fields.svg?style=flat-square" alt="NPM version"></a>
+  <a href="/LICENSE"><img src="https://img.shields.io/github/license/Mobeye/react-native-form.svg?style=flat-square" alt="License"></a>
+</p>
+
 ## Table of contents
 
 - [Getting started](#getting-started)
