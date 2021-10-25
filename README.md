@@ -2,11 +2,17 @@
 
 Optimized field components with nice design for react-native forms
 
-<p style="text-align: center;">
+<p align="center" >
   <a href="https://www.npmjs.com/package/@mobeye/react-native-form-fields"><img src="https://img.shields.io/npm/dm/@mobeye/react-native-form-fields.svg?style=flat-square" alt="NPM downloads"></a>
   <a href="https://www.npmjs.com/package/@mobeye/react-native-form-fields"><img src="https://img.shields.io/npm/v/@mobeye/react-native-form-fields.svg?style=flat-square" alt="NPM version"></a>
   <a href="/LICENSE"><img src="https://img.shields.io/github/license/Mobeye/react-native-form.svg?style=flat-square" alt="License"></a>
 </p>
+<p align="center" >
+  <a href="https://github.com/Mobeye/react-native-form/commits/master"><img src="https://img.shields.io/github/commit-activity/m/Mobeye/react-native-form.svg?style=flat-square" alt="Commit activity"></a>
+  <a href="https://github.com/Mobeye/react-native-form/commits/master"><img src="https://img.shields.io/github/last-commit/Mobeye/react-native-form.svg?style=flat-square" alt="Last Commit"></a>
+</p>
+
+---
 
 ## Table of contents
 
@@ -215,3 +221,14 @@ yarn && cd example/ios/ && pod install && cd .. && yarn start
 ```
 
 Then, open the example directory with xcode or android studio to build the example.
+
+---
+
+<p align="center">
+  <a href="https://mobeye-app.com/">
+    <img width="120px" src="https://u4s4z4j6.stackpathcdn.com/wp-content/uploads/2018/10/logo-noir-e1568971859438.png">
+  </a>
+  <p align="center">
+    Built and maintained by <a href="https://mobeye-app.com/">Mobeye</a>.
+  </p>
+</p>
