@@ -1,4 +1,11 @@
-import { ImageStyle, StyleProp, TextInputProps, TextStyle, ViewStyle } from 'react-native';
+import {
+    ImageComponent, ImageProps,
+    ImageStyle,
+    StyleProp,
+    TextInputProps,
+    TextStyle,
+    ViewStyle,
+} from 'react-native';
 import React, { FC } from 'react';
 
 export type Nullable<T> = T | null;
@@ -140,6 +147,10 @@ export interface MultiLineTextFieldProps extends DescriptionProps, MultiLineText
 }
 
 /* PhotoField */
+export interface ImageComponentProps {
+    thumbnailWidth?: number;
+    thumbnailHeight?: number;
+}
 export interface PhotoFieldStyles extends CommonStyles {
     imagesContainerStyle?: StyleProp<ViewStyle>;
     imageContainerStyle?: StyleProp<ViewStyle>;
@@ -149,12 +160,14 @@ export interface PhotoFieldStyles extends CommonStyles {
         error?: string;
     };
 }
-export interface PhotoFieldProps extends DescriptionProps, PhotoFieldStyles {
+export interface PhotoFieldProps<T> extends DescriptionProps, PhotoFieldStyles {
     label?: string;
     pictureUris: string[];
     isValid?: Nullable<boolean>;
     onPressPicture?: (index: number) => void;
     openCameraButton: React.ReactNode;
+    ImageComponent?: T;
+    imageComponentProps?: ImageComponentProps;
 }
 
 /* PickerField */
