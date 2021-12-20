@@ -1,11 +1,4 @@
-import {
-    ImageComponent, ImageProps,
-    ImageStyle,
-    StyleProp,
-    TextInputProps,
-    TextStyle,
-    ViewStyle,
-} from 'react-native';
+import { ImageStyle, StyleProp, TextInputProps, TextStyle, ViewStyle } from 'react-native';
 import React, { FC } from 'react';
 
 export type Nullable<T> = T | null;
@@ -160,14 +153,13 @@ export interface PhotoFieldStyles extends CommonStyles {
         error?: string;
     };
 }
-export interface PhotoFieldProps<T> extends DescriptionProps, PhotoFieldStyles {
+export interface PhotoFieldProps extends DescriptionProps, PhotoFieldStyles {
     label?: string;
     pictureUris: string[];
     isValid?: Nullable<boolean>;
     onPressPicture?: (index: number) => void;
     openCameraButton: React.ReactNode;
-    ImageComponent?: T;
-    imageComponentProps?: ImageComponentProps;
+    imageComponent?: (uri: string, style?: StyleProp<any>) => React.ReactNode;
 }
 
 /* PickerField */

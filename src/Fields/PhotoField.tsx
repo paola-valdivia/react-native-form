@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableHighlight, StyleProp, ImageStyle } from 'react-native';
 import R from 'ramda';
 
 import { PhotoFieldProps } from '../types';
@@ -31,8 +31,10 @@ const styles = StyleSheet.create({
     },
 });
 
-function PhotoField<T extends React.FC>(props: PhotoFieldProps<T>) {
-    const ImageComponent = props.ImageComponent || Image;
+const defaultImageComponent = (uri: string, style: StyleProp<ImageStyle>) => <Image source={{ uri }} style={style} />;
+
+function PhotoField(props: PhotoFieldProps) {
+    const imageComponent = props.imageComponent || defaultImageComponent;
     return (
         <View style={props.containerStyle}>
             <Description {...R.pick(descriptionProps, props)} />
@@ -58,13 +60,7 @@ function PhotoField<T extends React.FC>(props: PhotoFieldProps<T>) {
                             onPress={() => props.onPressPicture && props.onPressPicture(index)}
                             style={[styles.imageContainer, props.imageContainerStyle]}
                         >
-                            <ImageComponent
-                                source={{
-                                    uri: pictureUri,
-                                }}
-                                style={[styles.image, props.imageStyle]}
-                                {...props.imageComponentProps}
-                            />
+                            {imageComponent(pictureUri, [styles.image, props.imageStyle])}
                         </TouchableHighlight>
                     );
                 })}
